@@ -1,16 +1,12 @@
-# purofessor_mobile
+# Purofessor Mobile
 
-A new Flutter project.
+This is the mobile application for the **Purofessor** project, developed as part of the *Advanced Programming Methods* course. The app is built using **Flutter** and **Dart**, and serves as the mobile interface for interacting with the Purofessor system.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter SDK
+- Android Studio / VS Code
+- Android/iOS device or emulator
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
