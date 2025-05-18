@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
-import '../viewmodel/home_viewmodel.dart';
+import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
+import '../controllers/home_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 
-
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = HomeViewModel();
+    final viewPage = HomePageModel();
 
     return Scaffold(
       body: AppBackground(
         child: Column(
           children: [
-
             Padding(
               padding: const EdgeInsets.only(top: 16.0),
               child: Center(
@@ -31,9 +30,9 @@ class HomeView extends StatelessWidget {
             const Spacer(),
 
             Center(
-              child: ElevatedButton(
-                onPressed: viewModel.onLoginPressed,
-                child: const Text('Zaloguj'),
+              child: Button(
+                label: 'Przejdz do logowania',
+                onPressed: () => viewPage.onLoginPressed(context),
               ),
             ),
 
