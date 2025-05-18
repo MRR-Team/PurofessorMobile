@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart';
+
+class AuthController extends ChangeNotifier {
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  void login(BuildContext context, String email, String password) async {
+    _isLoading = true;
+    notifyListeners();
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    _isLoading = false;
+    notifyListeners();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Zalogowano pomyślnie')),
+    );
+  }
+}
