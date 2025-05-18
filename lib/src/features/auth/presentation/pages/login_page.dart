@@ -67,15 +67,12 @@ class LoginPage extends StatelessWidget {
                   Button(
                     label: 'Zaloguj',
                     fullWidth: true,
-                    onPressed: () {
-                      print('Zaloguj jako: ${emailController.text}');
-                    },
+                    onPressed: () {},
                   ),
 
                   const SizedBox(height: 16),
                   TextButton(
                     onPressed: () {
-                      // TODO: Przenieś do rejestracji
                     },
                     child: const Text('Nie masz konta? Zarejestruj się'),
                   ),
