@@ -14,8 +14,10 @@ class AuthController extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Zalogowano pomyślnie')),
-    );
+    if (context.mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Zalogowano pomyślnie')));
+    }
   }
 }
