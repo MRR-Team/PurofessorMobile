@@ -31,10 +31,8 @@ class RegisterForm extends StatelessWidget {
           TextFormField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
-            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Email',
-              labelStyle: TextStyle(color: Colors.white70),
               prefixIcon: Icon(Icons.email_outlined),
             ),
             validator: (value) {
@@ -47,16 +45,13 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormField(
             controller: nameController,
-            keyboardType: TextInputType.name,
-            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Nazwa',
-              labelStyle: TextStyle(color: Colors.white70),
-              prefixIcon: Icon(Icons.email_outlined),
+              prefixIcon: Icon(Icons.person_outline),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Podaj nazwe';
+                return 'Podaj nazwę';
               }
               return null;
             },
@@ -65,10 +60,8 @@ class RegisterForm extends StatelessWidget {
           TextFormField(
             controller: passwordController,
             obscureText: true,
-            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Hasło',
-              labelStyle: TextStyle(color: Colors.white70),
               prefixIcon: Icon(Icons.lock_outline),
             ),
             validator: (value) {
@@ -82,35 +75,36 @@ class RegisterForm extends StatelessWidget {
           TextFormField(
             controller: confirmPasswordController,
             obscureText: true,
-            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
-              labelText: 'Potwierdź Hasło',
-              labelStyle: TextStyle(color: Colors.white70),
+              labelText: 'Potwierdź hasło',
               prefixIcon: Icon(Icons.lock_outline),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Powórz hasło';
+                return 'Powtórz hasło';
+              }
+              if (value != passwordController.text) {
+                return 'Hasła nie są takie same';
               }
               return null;
             },
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
 
           Button(
             label: 'Zarejestruj się',
             isLoading: authController.isLoading,
             fullWidth: true,
             onPressed: () {
-              if (formKey.currentState!.validate()) {
-                authController.register(
-                  context,
-                  emailController.text,
-                  nameController.text,
-                  passwordController.text,
-                  confirmPasswordController.text,
-                );
-              }
+              // if (formKey.currentState!.validate()) {
+              //   authController.register(
+              //     context,
+              //     emailController.text,
+              //     nameController.text,
+              //     passwordController.text,
+              //     confirmPasswordController.text,
+              //   );
+              //}
             },
           ),
 
@@ -120,10 +114,7 @@ class RegisterForm extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, '/guest');
             },
-            child: const Text(
-              'Wejdź jako gość',
-              style: TextStyle(color: Colors.white70),
-            ),
+            child: const Text('Wejdź jako gość'),
           ),
         ],
       ),
