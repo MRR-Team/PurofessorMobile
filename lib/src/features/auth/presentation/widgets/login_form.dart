@@ -31,7 +31,7 @@ class LoginForm extends StatelessWidget {
             decoration: const InputDecoration(
               labelText: 'Email',
               labelStyle: TextStyle(color: Colors.white70),
-              prefixIcon: Icon(Icons.email_outlined),
+              prefixIcon: Icon(Icons.email_outlined, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -49,7 +49,7 @@ class LoginForm extends StatelessWidget {
             decoration: const InputDecoration(
               labelText: 'Hasło',
               labelStyle: TextStyle(color: Colors.white70),
-              prefixIcon: Icon(Icons.lock_outline),
+              prefixIcon: Icon(Icons.lock_outline, color: Colors.white,),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -84,6 +84,29 @@ class LoginForm extends StatelessWidget {
             child: const Text(
               'Wejdź jako gość',
               style: TextStyle(color: Colors.white70),
+            ),
+          ),
+
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/register');
+            },
+            child: const Text.rich(
+              TextSpan(
+                text: 'Nie masz konta? ',
+                style: TextStyle(color: Colors.white70),
+                children: [
+                  TextSpan(
+                    text: 'Zarejestruj się',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         ],

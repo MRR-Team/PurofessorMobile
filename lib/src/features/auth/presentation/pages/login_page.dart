@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:purofessor_mobile/src/features/auth/presentation/widgets/login_form.dart'; // <- dodaj import
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
-import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   LoginPage({super.key});
 
@@ -28,7 +29,6 @@ class LoginPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 12),
-
                   Text(
                     'Zaloguj się',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -38,43 +38,10 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
 
-                  TextField(
-                    controller: emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      prefixIcon: const Icon(Icons.email_outlined),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Hasło',
-                      prefixIcon: const Icon(Icons.lock_outline),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-
-                  Button(
-                    label: 'Zaloguj',
-                    fullWidth: true,
-                    onPressed: () {},
-                  ),
-
-                  const SizedBox(height: 16),
-                  TextButton(
-                    onPressed: () {
-                    },
-                    child: const Text('Nie masz konta? Zarejestruj się'),
+                  LoginForm(
+                    formKey: formKey,
+                    emailController: emailController,
+                    passwordController: passwordController,
                   ),
                 ],
               ),
