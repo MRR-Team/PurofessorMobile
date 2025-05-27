@@ -6,5 +6,3 @@ void main() async {
   final app = await AppSetup.initialize();
   runApp(app);
 }
-
-

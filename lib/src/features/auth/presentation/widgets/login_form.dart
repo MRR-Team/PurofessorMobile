@@ -49,7 +49,7 @@ class LoginForm extends StatelessWidget {
             decoration: const InputDecoration(
               labelText: 'Hasło',
               labelStyle: TextStyle(color: Colors.white70),
-              prefixIcon: Icon(Icons.lock_outline, color: Colors.white,),
+              prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
