@@ -1,39 +1,49 @@
+import 'package:purofessor_mobile/src/core/data/network/http_client.dart';
+import 'package:purofessor_mobile/src/core/exceptions/http_exception.dart';
 import 'package:flutter/material.dart';
 
 class AuthController extends ChangeNotifier {
-  bool _isLoading = false;
+  final HttpClient httpClient;
 
+  AuthController({required this.httpClient});
+
+  bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  void login(BuildContext context, String email, String password) async {
+  Future<void> login(BuildContext context, String email, String password) async {
     _isLoading = true;
     notifyListeners();
 
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final response = await httpClient.post(
+        '/api/login',
+        body: {
+          'email': email,
+          'password': password,
+        },
+      );
+
+      final token = response['token'];
+
+      if (context.mounted) {
+        print("gowno");
+        Navigator.pushReplacementNamed(context, '/dashboard');
+      }
+    } on HttpException catch (e) {
+      _showError(context, e.message);
+    } catch (_) {
+      _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
+    }
 
     _isLoading = false;
     notifyListeners();
-
-    if (context.mounted) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Zalogowano pomyślnie')));
-    }
   }
 
-  void register(BuildContext context, String email, String name, String password, String confirmPassword) async {
-    _isLoading = true;
-    notifyListeners();
-
-    await Future.delayed(const Duration(seconds: 2));
-
-    _isLoading = false;
-    notifyListeners();
-
+  void _showError(BuildContext context, String message) {
     if (context.mounted) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Zarejestrowano pomyślnie')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message), backgroundColor: Colors.red),
+      );
     }
   }
 }
