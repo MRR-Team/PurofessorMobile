@@ -3,9 +3,6 @@ import 'package:purofessor_mobile/src/features/auth/presentation/pages/login_pag
 
 class HomePageModel {
   void onLoginPressed(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => LoginPage()),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (_) => LoginPage()));
   }
 }

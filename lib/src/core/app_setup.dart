@@ -5,7 +5,10 @@ import 'package:purofessor_mobile/src/core/data/network/http_client.dart';
 
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:purofessor_mobile/src/features/auth/presentation/pages/login_page.dart';
+import 'package:purofessor_mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:purofessor_mobile/src/features/home/presentation/pages/home_page.dart';
+import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 
 class AppSetup {
   static Future<Widget> initialize() async {
@@ -21,7 +24,9 @@ class AppSetup {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthController(httpClient: httpClient)),
+        ChangeNotifierProvider(
+          create: (_) => AuthController(httpClient: httpClient),
+        ),
       ],
       child: const MyApp(),
     );
@@ -38,7 +43,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const HomePage(),
+      initialRoute: '/home',
+      routes: {
+        AppRoutes.login: (context) => LoginPage(),
+        AppRoutes.register: (context) => RegisterPage(),
+        AppRoutes.home: (context) => const HomePage(),
+      },
     );
   }
 }
