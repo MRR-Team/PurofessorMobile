@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:purofessor_mobile/src/core/data/network/http_client.dart';
 
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
+import 'package:purofessor_mobile/src/features/auth/data/data_sources/auth_data_source.dart';
+import 'package:purofessor_mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:purofessor_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/pages/login_page.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/pages/register_page.dart';
@@ -21,11 +24,15 @@ class AppSetup {
     }
 
     final httpClient = HttpClient(baseUrl: apiUrl);
+    final authDataSource = AuthDataSource(httpClient);
+    final authRepository = AuthRepositoryImpl(authDataSource);
+
+    final loginUseCase = LoginUseCase(authRepository);
 
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => AuthController(httpClient: httpClient),
+          create: (_) => AuthController(loginUseCase: loginUseCase,),
         ),
       ],
       child: const MyApp(),

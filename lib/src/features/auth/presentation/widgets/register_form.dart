@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 
@@ -33,7 +34,8 @@ class RegisterForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
               labelText: 'Email',
-              prefixIcon: Icon(Icons.email_outlined),
+              labelStyle: TextStyle(color: Colors.white70),
+              prefixIcon: Icon(Icons.email_outlined, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -47,7 +49,8 @@ class RegisterForm extends StatelessWidget {
             controller: nameController,
             decoration: const InputDecoration(
               labelText: 'Nazwa',
-              prefixIcon: Icon(Icons.person_outline),
+              labelStyle: TextStyle(color: Colors.white70),
+              prefixIcon: Icon(Icons.person_outline, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -62,7 +65,8 @@ class RegisterForm extends StatelessWidget {
             obscureText: true,
             decoration: const InputDecoration(
               labelText: 'Hasło',
-              prefixIcon: Icon(Icons.lock_outline),
+              labelStyle: TextStyle(color: Colors.white70),
+              prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -77,7 +81,8 @@ class RegisterForm extends StatelessWidget {
             obscureText: true,
             decoration: const InputDecoration(
               labelText: 'Potwierdź hasło',
-              prefixIcon: Icon(Icons.lock_outline),
+              labelStyle: TextStyle(color: Colors.white70),
+              prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -96,15 +101,15 @@ class RegisterForm extends StatelessWidget {
             isLoading: authController.isLoading,
             fullWidth: true,
             onPressed: () {
-              // if (formKey.currentState!.validate()) {
-              //   authController.register(
-              //     context,
-              //     emailController.text,
-              //     nameController.text,
-              //     passwordController.text,
-              //     confirmPasswordController.text,
-              //   );
-              //}
+              //  if (formKey.currentState!.validate()) {
+              //    authController.register(
+              //      context,
+              //      emailController.text,
+              //      nameController.text,
+              //      passwordController.text,
+              //      confirmPasswordController.text,
+              //    );
+              // }
             },
           ),
 
@@ -114,7 +119,19 @@ class RegisterForm extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, '/guest');
             },
-            child: const Text('Wejdź jako gość'),
+            child: const Text(
+              'Wejdź jako gość',
+              style: TextStyle(color: Colors.white70),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.login);
+            },
+            child: const Text(
+              'Masz już konto? Zaloguj się.',
+              style: TextStyle(color: Colors.white70),
+            ),
           ),
         ],
       ),
