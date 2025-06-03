@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
+import 'package:purofessor_mobile/src/features/home/presentation/controllers/home_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
-import '../controllers/home_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
+import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,6 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewPage = HomePageModel();
+    final userName = context.watch<AuthController>().userName;
 
     return Scaffold(
       body: AppBackground(
@@ -18,11 +21,20 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 16.0),
               child: Center(
-                child: Text(
-                  AppConstants.appName,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Column(
+                  children: [
+                    Text(
+                      AppConstants.appName,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Witaj, $userName',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -31,7 +43,7 @@ class HomePage extends StatelessWidget {
 
             Center(
               child: Button(
-                label: 'Przejdz do logowania',
+                label: 'Przejdź do logowania',
                 onPressed: () => viewPage.onLoginPressed(context),
               ),
             ),
