@@ -20,4 +20,21 @@ class AuthDataSource {
     await prefs.setString('token', token);
     await prefs.setString('user', jsonEncode(user));
   }
+
+  Future<void> register(
+    String email,
+    String name,
+    String password,
+    String confirmPassword,
+  ) async {
+    httpClient.post(
+      '/api/users',
+      body: {
+        'email': email,
+        'name': name,
+        'password': password,
+        'password_confirmation': confirmPassword,
+      },
+    );
+  }
 }

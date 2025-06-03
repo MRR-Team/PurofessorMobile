@@ -8,4 +8,6 @@ class LoginUseCase {
   Future<void> call(String email, String password) {
     return repository.login(email, password);
   }
+
+  AuthRepository get getRepository => repository;
 }

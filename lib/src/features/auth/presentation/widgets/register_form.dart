@@ -101,15 +101,15 @@ class RegisterForm extends StatelessWidget {
             isLoading: authController.isLoading,
             fullWidth: true,
             onPressed: () {
-              //  if (formKey.currentState!.validate()) {
-              //    authController.register(
-              //      context,
-              //      emailController.text,
-              //      nameController.text,
-              //      passwordController.text,
-              //      confirmPasswordController.text,
-              //    );
-              // }
+              if (formKey.currentState!.validate()) {
+                authController.register(
+                  context,
+                  emailController.text,
+                  nameController.text,
+                  passwordController.text,
+                  confirmPasswordController.text,
+                );
+              }
             },
           ),
 

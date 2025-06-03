@@ -6,10 +6,8 @@ class HttpClient {
   final String baseUrl;
   final http.Client _client;
 
-  HttpClient({
-    required this.baseUrl,
-    http.Client? client,
-  }) : _client = client ?? http.Client();
+  HttpClient({required this.baseUrl, http.Client? client})
+    : _client = client ?? http.Client();
 
   Future<dynamic> get(String path, {Map<String, String>? headers}) async {
     final response = await _client.get(
@@ -19,7 +17,11 @@ class HttpClient {
     return _handleResponse(response);
   }
 
-  Future<dynamic> post(String path, {Map<String, String>? headers, dynamic body}) async {
+  Future<dynamic> post(
+    String path, {
+    Map<String, String>? headers,
+    dynamic body,
+  }) async {
     final response = await _client.post(
       Uri.parse('$baseUrl$path'),
       headers: _defaultHeaders(headers),
@@ -28,7 +30,11 @@ class HttpClient {
     return _handleResponse(response);
   }
 
-  Future<dynamic> put(String path, {Map<String, String>? headers, dynamic body}) async {
+  Future<dynamic> put(
+    String path, {
+    Map<String, String>? headers,
+    dynamic body,
+  }) async {
     final response = await _client.put(
       Uri.parse('$baseUrl$path'),
       headers: _defaultHeaders(headers),
@@ -46,10 +52,7 @@ class HttpClient {
   }
 
   Map<String, String> _defaultHeaders(Map<String, String>? custom) {
-    return {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    };
+    return {'Content-Type': 'application/json', 'Accept': 'application/json'};
   }
 
   dynamic _handleResponse(http.Response response) {
@@ -65,4 +68,3 @@ class HttpClient {
     }
   }
 }
-
