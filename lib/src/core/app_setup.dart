@@ -7,6 +7,7 @@ import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
 import 'package:purofessor_mobile/src/features/auth/data/data_sources/auth_data_source.dart';
 import 'package:purofessor_mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/login_usecase.dart';
+import 'package:purofessor_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/register_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/pages/login_page.dart';
@@ -29,9 +30,12 @@ class AppSetup {
     final authRepository = AuthRepositoryImpl(authDataSource);
     final loginUseCase = LoginUseCase(authRepository);
     final registerUseCase = RegisterUseCase(authRepository);
+    final logoutUseCase = LogoutUseCase(authRepository);
+
     final authController = AuthController(
       loginUseCase: loginUseCase,
       registerUseCase: registerUseCase,
+      logoutUseCase: logoutUseCase,
     );
     await authController.loadUser();
 

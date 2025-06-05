@@ -32,4 +32,9 @@ class AuthRepositoryImpl implements AuthRepository {
   ) {
     return dataSource.register(email, name, password, confirmPassword);
   }
+
+  @override
+  Future<void> logout() async {
+    await dataSource.logout();
+  }
 }

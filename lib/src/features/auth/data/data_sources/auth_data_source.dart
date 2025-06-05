@@ -37,4 +37,8 @@ class AuthDataSource {
       },
     );
   }
+
+  Future<void> logout() async {
+    await httpClient.post('/api/logout');
+  }
 }

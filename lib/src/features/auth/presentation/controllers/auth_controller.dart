@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:purofessor_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/register_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
@@ -9,14 +10,21 @@ import 'package:purofessor_mobile/src/features/auth/domain/usecases/login_usecas
 class AuthController extends ChangeNotifier {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
+  final LogoutUseCase logoutUseCase;
 
-  AuthController({required this.loginUseCase, required this.registerUseCase});
+  AuthController({
+    required this.loginUseCase,
+    required this.registerUseCase,
+    required this.logoutUseCase,
+  });
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
   Map<String, dynamic>? _user;
   Map<String, dynamic>? get user => _user;
+
+  bool get isLoggedIn => _user != null;
 
   String get userName => _user?['name'] ?? 'Gość';
 
@@ -91,6 +99,32 @@ class AuthController extends ChangeNotifier {
       _showError(context, e.message);
     } catch (_) {
       _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> logout(BuildContext context) async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      await logoutUseCase();
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('token');
+      await prefs.remove('user');
+
+      _user = null;
+
+      if (context.mounted) {
+        Navigator.pushReplacementNamed(context, AppRoutes.home);
+      }
+    } on HttpException catch (e) {
+      _showError(context, e.message);
+    } catch (_) {
+      _showError(context, 'Błąd wylogowywania.');
     }
 
     _isLoading = false;
