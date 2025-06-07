@@ -26,7 +26,7 @@ This repository contains the **Flutter** application designed for Android device
 This project is part of a multi-platform system. You can find the other components here:
 
 -  [Web App](https://github.com/MRR-Team/PurofessorWeb)
-- ️ [Desktop App](https://github.com/MRR-Team/PurofessorDesktop)
+-  [Desktop App](https://github.com/MRR-Team/PurofessorDesktop)
 -  [REST API](https://github.com/MRR-Team/PurofessorAPI)
 
 ---
