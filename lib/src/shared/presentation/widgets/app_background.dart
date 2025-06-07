@@ -7,12 +7,17 @@ class AppBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.deepPurple, Colors.deepPurpleAccent],
+          colors:
+              isDark
+                  ? [Colors.black, Colors.grey.shade900]
+                  : [Colors.deepPurple, Colors.deepPurpleAccent],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),

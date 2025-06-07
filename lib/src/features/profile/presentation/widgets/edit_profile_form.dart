@@ -25,18 +25,33 @@ class _EditProfileFormState extends State<EditProfileForm> {
           children: [
             TextFormField(
               controller: nameController,
+              style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 labelText: 'Nowa nazwa użytkownika',
+                labelStyle: TextStyle(color: Colors.white70),
+                prefixIcon: Icon(Icons.person_outline, color: Colors.white),
               ),
             ),
+            const SizedBox(height: 16),
             TextFormField(
               controller: passwordController,
-              decoration: const InputDecoration(labelText: 'Nowe hasło'),
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                labelText: 'Nowe hasło',
+                labelStyle: TextStyle(color: Colors.white70),
+                prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
+              ),
               obscureText: true,
             ),
+            const SizedBox(height: 16),
             TextFormField(
               controller: confirmController,
-              decoration: const InputDecoration(labelText: 'Potwierdź hasło'),
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                labelText: 'Potwierdź hasło',
+                labelStyle: TextStyle(color: Colors.white70),
+                prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
+              ),
               obscureText: true,
               validator: (value) {
                 if (passwordController.text.isNotEmpty &&

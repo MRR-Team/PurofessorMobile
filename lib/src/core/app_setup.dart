@@ -18,7 +18,9 @@ import 'package:purofessor_mobile/src/features/profile/data/repositories/profile
 import 'package:purofessor_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
 import 'package:purofessor_mobile/src/features/profile/presentation/controllers/profile_controller.dart';
 import 'package:purofessor_mobile/src/features/profile/presentation/pages/profile_page.dart';
-import 'package:purofessor_mobile/src/shared/presentation/controllers/navbar_controllers.dart';
+import 'package:purofessor_mobile/src/features/settings/presentation/pages/settings_page.dart';
+import 'package:purofessor_mobile/src/shared/presentation/controllers/navbar_controller.dart';
+import 'package:purofessor_mobile/src/shared/presentation/controllers/theme_controller.dart';
 
 class AppSetup {
   static Future<Widget> initialize() async {
@@ -51,6 +53,7 @@ class AppSetup {
       authController,
       authDataSource,
     );
+    final themeController = ThemeController();
 
     return MultiProvider(
       providers: [
@@ -59,6 +62,7 @@ class AppSetup {
         ChangeNotifierProvider<ProfileController>.value(
           value: profileController,
         ),
+        ChangeNotifierProvider<ThemeController>.value(value: themeController),
       ],
       child: const MyApp(),
     );
@@ -70,17 +74,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeController = Provider.of<ThemeController>(context);
+
     return MaterialApp(
       title: AppConstants.appName,
+      themeMode: themeController.themeMode,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.transparent,
+        primarySwatch: Colors.deepPurple,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.transparent,
+        primarySwatch: Colors.deepPurple,
       ),
       initialRoute: '/home',
       routes: {
         AppRoutes.login: (context) => LoginPage(),
         AppRoutes.register: (context) => RegisterPage(),
         AppRoutes.home: (context) => const HomePage(),
-        // AppRoutes.settings: (context) => const SettingsPage(),
+        AppRoutes.settings: (context) => const SettingsPage(),
         AppRoutes.profile: (context) => const ProfilePage(),
       },
     );
