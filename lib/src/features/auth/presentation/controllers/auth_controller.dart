@@ -28,10 +28,13 @@ class AuthController extends ChangeNotifier {
   bool get isLoggedIn => _user != null;
 
   Future<void> login(
-    BuildContext context,
-    String email,
-    String password,
-  ) async {
+      BuildContext context,
+      String email,
+      String password,
+      ) async {
+    final navigator = Navigator.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+
     _isLoading = true;
     notifyListeners();
 
@@ -39,16 +42,18 @@ class AuthController extends ChangeNotifier {
       await loginUseCase(email, password);
       await loadUser();
 
-      if (context.mounted) {
-        Navigator.pushReplacementNamed(context, AppRoutes.home);
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Zalogowano pomyślnie')));
-      }
+      if (!context.mounted) return;
+
+      navigator.pushReplacementNamed(AppRoutes.home);
+      messenger.showSnackBar(const SnackBar(content: Text('Zalogowano pomyślnie')));
     } on HttpException catch (e) {
-      _showError(context, e.message);
+      if (context.mounted) {
+        _showError(context, e.message);
+      }
     } catch (_) {
-      _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
+      if (context.mounted) {
+        _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
+      }
     }
 
     _isLoading = false;
@@ -66,18 +71,20 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await registerUseCase(email, name, password, confirmPassword);
+      await loginUseCase(email, password);
       await loadUser();
 
-      if (context.mounted) {
-        Navigator.pushReplacementNamed(context, AppRoutes.home);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Zarejestrowano pomyślnie')),
-        );
-      }
+      if (!context.mounted) return;
+
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Zalogowano pomyślnie')),
+      );
     } on HttpException catch (e) {
+      if (!context.mounted) return;
       _showError(context, e.message);
     } catch (_) {
+      if (!context.mounted) return;
       _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
     }
 
@@ -86,6 +93,8 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<void> logout(BuildContext context) async {
+    final navigator = Navigator.of(context);
+
     _isLoading = true;
     notifyListeners();
 
@@ -99,12 +108,16 @@ class AuthController extends ChangeNotifier {
       _user = null;
 
       if (context.mounted) {
-        Navigator.pushReplacementNamed(context, AppRoutes.home);
+        navigator.pushReplacementNamed(AppRoutes.home);
       }
     } on HttpException catch (e) {
-      _showError(context, e.message);
+      if (context.mounted) {
+        _showError(context, e.message);
+      }
     } catch (_) {
-      _showError(context, 'Błąd wylogowywania.');
+      if (context.mounted) {
+        _showError(context, 'Błąd wylogowywania.');
+      }
     }
 
     _isLoading = false;
