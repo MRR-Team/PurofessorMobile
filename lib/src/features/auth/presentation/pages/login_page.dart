@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/widgets/login_form.dart'; // <- dodaj import
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
+import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -13,6 +14,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: AppBottomNavigationBar(),
       body: AppBackground(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
