@@ -18,25 +18,26 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final buttonChild = isLoading
-        ? const SizedBox(
-      width: 20,
-      height: 20,
-      child: CircularProgressIndicator(
-        strokeWidth: 2,
-        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-      ),
-    )
-        : (icon != null
-        ? Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 20),
-        const SizedBox(width: 8),
-        Text(label),
-      ],
-    )
-        : Text(label));
+    final buttonChild =
+        isLoading
+            ? const SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
+            )
+            : (icon != null
+                ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(icon, size: 20),
+                    const SizedBox(width: 8),
+                    Text(label),
+                  ],
+                )
+                : Text(label));
 
     return SizedBox(
       width: fullWidth ? double.infinity : null,

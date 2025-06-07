@@ -12,14 +12,14 @@ class AppBottomNavigationBar extends StatelessWidget {
     final navbarController = Provider.of<NavbarController>(context);
     final authController = Provider.of<AuthController>(context);
 
-    final availablePages = NavbarPages.values.where((page) {
-      if (!page.requiresAuth) return true;
-      return authController.isLoggedIn;
-    }).toList();
+    final availablePages =
+        NavbarPages.values.where((page) {
+          if (!page.requiresAuth) return true;
+          return authController.isLoggedIn;
+        }).toList();
 
     final currentIndex = availablePages.indexOf(navbarController.selectedPage);
     final safeIndex = currentIndex >= 0 ? currentIndex : 0;
-
 
     return BottomNavigationBar(
       currentIndex: safeIndex,
@@ -27,12 +27,13 @@ class AppBottomNavigationBar extends StatelessWidget {
         final selected = availablePages[index];
         navbarController.selectPage(selected, context);
       },
-      items: availablePages.map((page) {
-        return BottomNavigationBarItem(
-          icon: const SizedBox(),
-          label: page.label,
-        );
-      }).toList(),
+      items:
+          availablePages.map((page) {
+            return BottomNavigationBarItem(
+              icon: const SizedBox(),
+              label: page.label,
+            );
+          }).toList(),
     );
   }
 }
