@@ -28,10 +28,10 @@ class AuthController extends ChangeNotifier {
   bool get isLoggedIn => _user != null;
 
   Future<void> login(
-      BuildContext context,
-      String email,
-      String password,
-      ) async {
+    BuildContext context,
+    String email,
+    String password,
+  ) async {
     final navigator = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
 
@@ -45,7 +45,9 @@ class AuthController extends ChangeNotifier {
       if (!context.mounted) return;
 
       navigator.pushReplacementNamed(AppRoutes.home);
-      messenger.showSnackBar(const SnackBar(content: Text('Zalogowano pomyślnie')));
+      messenger.showSnackBar(
+        const SnackBar(content: Text('Zalogowano pomyślnie')),
+      );
     } on HttpException catch (e) {
       if (context.mounted) {
         _showError(context, e.message);
@@ -71,15 +73,14 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await loginUseCase(email, password);
-      await loadUser();
+      await registerUseCase(email, name, password, confirmPassword);
 
       if (!context.mounted) return;
 
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Zalogowano pomyślnie')),
-      );
+      Navigator.pushReplacementNamed(context, AppRoutes.login);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Zarejestrowano pomyślnie')));
     } on HttpException catch (e) {
       if (!context.mounted) return;
       _showError(context, e.message);

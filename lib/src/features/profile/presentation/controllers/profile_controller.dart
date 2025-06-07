@@ -47,7 +47,9 @@ class ProfileController extends ChangeNotifier {
       await authController.loadUser();
 
       if (context.mounted) {
-        messenger.showSnackBar(const SnackBar(content: Text('Zaktualizowano profil')));
+        messenger.showSnackBar(
+          const SnackBar(content: Text('Zaktualizowano profil')),
+        );
       }
       toggleEdit();
     } catch (e) {

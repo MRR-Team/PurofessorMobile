@@ -32,6 +32,7 @@ class RegisterForm extends StatelessWidget {
           TextFormField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
+            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Email',
               labelStyle: TextStyle(color: Colors.white70),
@@ -47,6 +48,7 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormField(
             controller: nameController,
+            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Nazwa',
               labelStyle: TextStyle(color: Colors.white70),
@@ -63,6 +65,7 @@ class RegisterForm extends StatelessWidget {
           TextFormField(
             controller: passwordController,
             obscureText: true,
+            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Hasło',
               labelStyle: TextStyle(color: Colors.white70),
@@ -79,6 +82,7 @@ class RegisterForm extends StatelessWidget {
           TextFormField(
             controller: confirmPasswordController,
             obscureText: true,
+            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               labelText: 'Potwierdź hasło',
               labelStyle: TextStyle(color: Colors.white70),

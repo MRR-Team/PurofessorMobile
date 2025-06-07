@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/shared/domain/models/navbar_pages.dart';
-import 'package:purofessor_mobile/src/shared/presentation/controllers/navbar_controllers.dart';
+import 'package:purofessor_mobile/src/shared/presentation/controllers/navbar_controller.dart';
 
 class AppBottomNavigationBar extends StatelessWidget {
   const AppBottomNavigationBar({super.key});
