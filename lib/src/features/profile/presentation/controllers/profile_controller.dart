@@ -33,6 +33,8 @@ class ProfileController extends ChangeNotifier {
     String? name,
     String? password,
   }) async {
+    final messenger = ScaffoldMessenger.of(context);
+
     try {
       await updateProfileUseCase(name: name, password: password);
 
@@ -44,14 +46,16 @@ class ProfileController extends ChangeNotifier {
 
       await authController.loadUser();
 
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Zaktualizowano profil')));
+      if (context.mounted) {
+        messenger.showSnackBar(const SnackBar(content: Text('Zaktualizowano profil')));
+      }
       toggleEdit();
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Błąd aktualizacji profilu')),
-      );
+      if (context.mounted) {
+        messenger.showSnackBar(
+          const SnackBar(content: Text('Błąd aktualizacji profilu')),
+        );
+      }
     }
   }
 }
