@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/register_usecase.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:purofessor_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 import 'package:purofessor_mobile/src/core/exceptions/http_exception.dart';
-import 'package:purofessor_mobile/src/features/auth/domain/usecases/login_usecase.dart';
+import 'package:purofessor_mobile/src/shared/domain/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends ChangeNotifier {
   final LoginUseCase loginUseCase;
@@ -21,12 +22,10 @@ class AuthController extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  Map<String, dynamic>? _user;
-  Map<String, dynamic>? get user => _user;
+  User? _user;
+  User? get user => _user;
 
   bool get isLoggedIn => _user != null;
-
-  String get userName => _user?['name'] ?? 'Gość';
 
   Future<void> login(
     BuildContext context,
@@ -54,25 +53,6 @@ class AuthController extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
-  }
-
-  Future<void> loadUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    final userJson = prefs.getString('user');
-    if (userJson != null) {
-      _user = jsonDecode(userJson);
-    } else {
-      _user = null;
-    }
-    notifyListeners();
-  }
-
-  void _showError(BuildContext context, String message) {
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message), backgroundColor: Colors.red),
-      );
-    }
   }
 
   Future<void> register(
@@ -129,5 +109,24 @@ class AuthController extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+  }
+
+  Future<void> loadUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userJson = prefs.getString('user');
+    if (userJson != null) {
+      _user = User.fromJson(jsonDecode(userJson));
+    } else {
+      _user = null;
+    }
+    notifyListeners();
+  }
+
+  void _showError(BuildContext context, String message) {
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message), backgroundColor: Colors.red),
+      );
+    }
   }
 }

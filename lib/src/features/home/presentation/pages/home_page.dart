@@ -14,7 +14,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewPage = HomePageModel();
-    final userName = context.watch<AuthController>().userName;
 
     return Scaffold(
       bottomNavigationBar: AppBottomNavigationBar(),
@@ -29,18 +28,15 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Witaj, $userName',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const Spacer(),
-              Button(
-                label: 'Przejdź do logowania',
-                onPressed: () => viewPage.onLoginPressed(context),
-              ),
+
               if (context.watch<AuthController>().isLoggedIn)
-                const LogoutButton(),
+                const LogoutButton()
+              else
+                Button(
+                  label: 'Przejdź do logowania',
+                  onPressed: () => viewPage.onLoginPressed(context),
+                ),
+
               const Spacer(),
             ],
           ),

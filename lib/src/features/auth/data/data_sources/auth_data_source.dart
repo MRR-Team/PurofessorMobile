@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:purofessor_mobile/src/core/data/network/http_client.dart';
+import 'package:purofessor_mobile/src/shared/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthDataSource {
@@ -14,11 +15,11 @@ class AuthDataSource {
     );
 
     final token = response['token'];
-    final user = response['user'];
+    final user = User.fromJson(response['user']);
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
-    await prefs.setString('user', jsonEncode(user));
+    await prefs.setString('user', jsonEncode(user.toJson()));
   }
 
   Future<void> register(
