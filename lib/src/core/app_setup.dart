@@ -14,6 +14,10 @@ import 'package:purofessor_mobile/src/features/auth/presentation/pages/login_pag
 import 'package:purofessor_mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:purofessor_mobile/src/features/home/presentation/pages/home_page.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
+import 'package:purofessor_mobile/src/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:purofessor_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
+import 'package:purofessor_mobile/src/features/profile/presentation/controllers/profile_controller.dart';
+import 'package:purofessor_mobile/src/features/profile/presentation/pages/profile_page.dart';
 import 'package:purofessor_mobile/src/shared/presentation/controllers/navbar_controllers.dart';
 
 class AppSetup {
@@ -40,10 +44,21 @@ class AppSetup {
     );
     await authController.loadUser();
 
+    final profileRepository = ProfileRepositoryImpl(httpClient, authController);
+    final updateProfileUseCase = UpdateProfileUseCase(profileRepository);
+    final profileController = ProfileController(
+      updateProfileUseCase,
+      authController,
+      authDataSource,
+    );
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthController>.value(value: authController),
         ChangeNotifierProvider(create: (_) => NavbarController()),
+        ChangeNotifierProvider<ProfileController>.value(
+          value: profileController,
+        ),
       ],
       child: const MyApp(),
     );
@@ -66,7 +81,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.register: (context) => RegisterPage(),
         AppRoutes.home: (context) => const HomePage(),
         // AppRoutes.settings: (context) => const SettingsPage(),
-        // AppRoutes.profile: (context) => const ProfilePage(),
+        AppRoutes.profile: (context) => const ProfilePage(),
       },
     );
   }

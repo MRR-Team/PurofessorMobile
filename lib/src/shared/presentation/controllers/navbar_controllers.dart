@@ -12,5 +12,4 @@ class NavbarController extends ChangeNotifier {
 
     Navigator.pushReplacementNamed(context, page.routeName);
   }
-
 }
