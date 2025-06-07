@@ -8,7 +8,7 @@ This repository contains the **Flutter** application designed for Android device
 
 ## About the Project
 
-**Purofessor** is a app for finding counter pick in game League of Legends.
+**Purofessor** is an app for finding counter pick in game League of Legends.
 
 ---
 
