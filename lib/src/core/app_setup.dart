@@ -14,6 +14,7 @@ import 'package:purofessor_mobile/src/features/auth/presentation/pages/login_pag
 import 'package:purofessor_mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:purofessor_mobile/src/features/home/presentation/pages/home_page.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
+import 'package:purofessor_mobile/src/shared/presentation/controllers/navbar_controllers.dart';
 
 class AppSetup {
   static Future<Widget> initialize() async {
@@ -42,6 +43,7 @@ class AppSetup {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthController>.value(value: authController),
+        ChangeNotifierProvider(create: (_) => NavbarController()),
       ],
       child: const MyApp(),
     );
@@ -63,6 +65,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.login: (context) => LoginPage(),
         AppRoutes.register: (context) => RegisterPage(),
         AppRoutes.home: (context) => const HomePage(),
+        // AppRoutes.settings: (context) => const SettingsPage(),
+        // AppRoutes.profile: (context) => const ProfilePage(),
       },
     );
   }
