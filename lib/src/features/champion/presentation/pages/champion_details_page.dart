@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:purofessor_mobile/src/features/champion/presentation/controllers/champion_controller.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/models/champion_model.dart';
+import 'package:purofessor_mobile/src/features/champion/presentation/controllers/champion_controller.dart';
+import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_counters.dart';
+import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_info.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
 
@@ -18,15 +20,11 @@ class ChampionDetailsPage extends StatelessWidget {
       future: controller.fetchChampionDetails(championId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
+          return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
 
         if (snapshot.hasError || !snapshot.hasData) {
-          return const Scaffold(
-            body: Center(child: Text('Nie udało się załadować championa')),
-          );
+          return const Scaffold(body: Center(child: Text('Nie udało się załadować championa')));
         }
 
         final champion = snapshot.data!;
@@ -39,11 +37,8 @@ class ChampionDetailsPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nazwa championa: ${champion.name}', style: const TextStyle(color: Colors.white, fontSize: 18)),
-                  const SizedBox(height: 8),
-                  Text('Pozycja: ${champion.position}', style: const TextStyle(color: Colors.white, fontSize: 18)),
-                  const SizedBox(height: 8),
-                  Text('Rola: ${champion.role}', style: const TextStyle(color: Colors.white, fontSize: 18)),
+                  ChampionInfo(champion: champion),
+                  ChampionCounters(champion: champion),
                 ],
               ),
             ),
