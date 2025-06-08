@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:purofessor_mobile/src/features/auth/presentation/widgets/logout_button.dart';
 import 'package:purofessor_mobile/src/shared/presentation/controllers/theme_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
@@ -33,6 +35,12 @@ class SettingsPage extends StatelessWidget {
                   );
                 },
               ),
+
+              if (context.watch<AuthController>().isLoggedIn) ...[
+                const SizedBox(height: 32),
+                const LogoutButton(),
+              ],
+
             ],
           ),
         ),
