@@ -29,7 +29,7 @@ class AuthDataSource {
     String confirmPassword,
   ) async {
     httpClient.post(
-      '/api/users',
+      '/api/register',
       body: {
         'email': email,
         'name': name,
