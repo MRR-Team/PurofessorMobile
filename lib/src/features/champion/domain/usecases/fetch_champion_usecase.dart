@@ -6,6 +6,6 @@ class FetchChampionsUseCase {
   FetchChampionsUseCase(this.repo);
 
   Future<List<ChampionModel>> call() {
-    return repo.getAvailableChampions();
+    return repo.getChampions();
   }
 }

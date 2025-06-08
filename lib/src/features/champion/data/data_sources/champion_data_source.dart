@@ -5,8 +5,13 @@ class ChampionDataSource {
 
   ChampionDataSource(this.httpClient);
 
-  Future<List<Map<String, dynamic>>> getAvailableChampions() async {
-    final response = await httpClient.get('/api/available-champions');
+  Future<List<Map<String, dynamic>>> getChampions() async {
+    final response = await httpClient.get('/api/champions');
     return List<Map<String, dynamic>>.from(response);
+  }
+
+  Future<Map<String, dynamic>> getChampionDetails(int id) async {
+    final response = await httpClient.get('/api/champions/$id');
+    return Map<String, dynamic>.from(response);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/controllers/champion_controller.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_search_bar.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/widgets/position_filter.dart';
@@ -68,7 +69,13 @@ class _ChampionSearchPageState extends State<ChampionSearchPage> {
                                 c.position,
                                 style: TextStyle(color: Colors.white),
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRoutes.championDetails,
+                                  arguments: c.id,
+                                );
+                              },
                             );
                           },
                         ),

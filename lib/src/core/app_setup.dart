@@ -15,6 +15,7 @@ import 'package:purofessor_mobile/src/features/auth/presentation/pages/register_
 import 'package:purofessor_mobile/src/features/champion/data/data_sources/champion_data_source.dart';
 import 'package:purofessor_mobile/src/features/champion/data/repositories/champion_repository_impl.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/controllers/champion_controller.dart';
+import 'package:purofessor_mobile/src/features/champion/presentation/pages/champion_details_page.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/pages/champion_search_page.dart';
 import 'package:purofessor_mobile/src/features/home/presentation/pages/home_page.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
@@ -117,6 +118,10 @@ class MyApp extends StatelessWidget {
         AppRoutes.settings: (context) => const SettingsPage(),
         AppRoutes.profile: (context) => const ProfilePage(),
         AppRoutes.championSearch: (context) => const ChampionSearchPage(),
+        AppRoutes.championDetails: (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as int;
+          return ChampionDetailsPage(championId: args);
+        },
       },
     );
   }

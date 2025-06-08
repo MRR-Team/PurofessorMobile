@@ -24,7 +24,7 @@ class ChampionController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _champions = await repository.getAvailableChampions();
+      _champions = await repository.getChampions();
       applyFilters();
     } on HttpException catch (e) {
       if (context.mounted) _showError(context, e.message);
@@ -34,6 +34,10 @@ class ChampionController extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+  }
+
+  Future<ChampionModel> fetchChampionDetails(int id) async {
+    return await repository.getChampionDetails(id);
   }
 
   void updateQuery(String value) {
