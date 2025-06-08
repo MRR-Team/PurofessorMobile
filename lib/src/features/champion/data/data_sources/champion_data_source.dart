@@ -19,7 +19,9 @@ class ChampionDataSource {
     required String role,
     required int enemyChampionId,
   }) async {
-    final response = await httpClient.get('/api/counter/$role/$enemyChampionId');
+    final response = await httpClient.get(
+      '/api/counter/$role/$enemyChampionId',
+    );
     return List<Map<String, dynamic>>.from(response);
   }
 }

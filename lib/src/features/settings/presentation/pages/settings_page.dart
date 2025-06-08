@@ -40,7 +40,6 @@ class SettingsPage extends StatelessWidget {
                 const SizedBox(height: 32),
                 const LogoutButton(),
               ],
-
             ],
           ),
         ),

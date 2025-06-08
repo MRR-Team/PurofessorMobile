@@ -24,8 +24,10 @@ class ChampionRepositoryImpl implements ChampionRepository {
     required String role,
     required int enemyChampionId,
   }) async {
-    final data = await dataSource.getCounters(role: role, enemyChampionId: enemyChampionId);
+    final data = await dataSource.getCounters(
+      role: role,
+      enemyChampionId: enemyChampionId,
+    );
     return data.map((e) => ChampionModel.fromJson(e)).toList();
   }
-
 }

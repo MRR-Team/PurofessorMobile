@@ -31,11 +31,22 @@ class ChampionCounters extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 16),
-            Text('Kontry na ${champion.name}:', style: const TextStyle(color: Colors.amber, fontSize: 18)),
+            Text(
+              'Kontry na ${champion.name}:',
+              style: const TextStyle(color: Colors.amber, fontSize: 18),
+            ),
             const SizedBox(height: 8),
-            ...counters.map((c) => Text('• ${c.name}', style: const TextStyle(color: Colors.white))),
+            ...counters.map(
+              (c) => Text(
+                '• ${c.name}',
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
             if (counters.isEmpty)
-              const Text('Brak danych o kontrach.', style: TextStyle(color: Colors.white)),
+              const Text(
+                'Brak danych o kontrach.',
+                style: TextStyle(color: Colors.white),
+              ),
           ],
         );
       },

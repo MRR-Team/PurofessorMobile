@@ -20,11 +20,15 @@ class ChampionDetailsPage extends StatelessWidget {
       future: controller.fetchChampionDetails(championId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
 
         if (snapshot.hasError || !snapshot.hasData) {
-          return const Scaffold(body: Center(child: Text('Nie udało się załadować championa')));
+          return const Scaffold(
+            body: Center(child: Text('Nie udało się załadować championa')),
+          );
         }
 
         final champion = snapshot.data!;

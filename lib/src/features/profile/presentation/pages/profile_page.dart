@@ -21,7 +21,11 @@ class ProfilePage extends StatelessWidget {
     if (user == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (context.mounted) {
-          Navigator.pushNamedAndRemoveUntil(context, AppRoutes.home, (route) => false);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRoutes.home,
+            (route) => false,
+          );
         }
       });
       return const SizedBox.shrink();
@@ -60,7 +64,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               const SizedBox(height: 32),
 
-              const LogoutButton()
+              const LogoutButton(),
             ],
           ),
         ),

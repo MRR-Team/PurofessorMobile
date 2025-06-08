@@ -7,5 +7,4 @@ abstract class ChampionRepository {
     required String role,
     required int enemyChampionId,
   });
-
 }
