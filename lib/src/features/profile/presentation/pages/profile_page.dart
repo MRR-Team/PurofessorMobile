@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:purofessor_mobile/src/features/auth/presentation/widgets/logout_button.dart';
 import 'package:purofessor_mobile/src/features/profile/presentation/controllers/profile_controller.dart';
 import 'package:purofessor_mobile/src/features/profile/presentation/widgets/edit_profile_form.dart';
 import 'package:purofessor_mobile/src/features/profile/presentation/widgets/profile_info_card.dart';
@@ -16,7 +18,14 @@ class ProfilePage extends StatelessWidget {
     final user = context.watch<AuthController>().user;
     final controller = context.watch<ProfileController>();
 
-    if (user == null) return const Center(child: Text('Nie jesteś zalogowany'));
+    if (user == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) {
+          Navigator.pushNamedAndRemoveUntil(context, AppRoutes.home, (route) => false);
+        }
+      });
+      return const SizedBox.shrink();
+    }
 
     return Scaffold(
       appBar: AppBar(title: const Text('Profil')),
@@ -49,6 +58,9 @@ class ProfilePage extends StatelessWidget {
                     );
                   },
                 ),
+              const SizedBox(height: 32),
+
+              const LogoutButton()
             ],
           ),
         ),

@@ -109,7 +109,7 @@ class AuthController extends ChangeNotifier {
       _user = null;
 
       if (context.mounted) {
-        navigator.pushReplacementNamed(AppRoutes.home);
+        navigator.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
       }
     } on HttpException catch (e) {
       if (context.mounted) {

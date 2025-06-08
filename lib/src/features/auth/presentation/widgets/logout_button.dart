@@ -3,14 +3,16 @@ import 'package:provider/provider.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 
 class LogoutButton extends StatelessWidget {
-  const LogoutButton({super.key});
+  final String label;
+  const LogoutButton({super.key, this.label = 'Wyloguj się'});
 
   @override
   Widget build(BuildContext context) {
     final authController = Provider.of<AuthController>(context, listen: false);
 
-    return IconButton(
+    return ElevatedButton.icon(
       icon: const Icon(Icons.logout),
+      label: Text(label),
       onPressed: () {
         showDialog(
           context: context,

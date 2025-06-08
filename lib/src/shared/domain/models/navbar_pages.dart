@@ -1,6 +1,6 @@
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 
-enum NavbarPages { home, settings, profile, championSearch }
+enum NavbarPages { home, championSearch, profile, settings }
 
 extension NavbarPagesExtension on NavbarPages {
   String get routeName {

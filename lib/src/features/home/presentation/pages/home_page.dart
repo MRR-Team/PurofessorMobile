@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
-import 'package:purofessor_mobile/src/features/auth/presentation/widgets/logout_button.dart';
 import 'package:purofessor_mobile/src/features/home/presentation/controllers/home_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
@@ -29,9 +28,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-              if (context.watch<AuthController>().isLoggedIn)
-                const LogoutButton()
-              else
+              if (!context.watch<AuthController>().isLoggedIn)
                 Button(
                   label: 'Przejdź do logowania',
                   onPressed: () => viewPage.onLoginPressed(context),
