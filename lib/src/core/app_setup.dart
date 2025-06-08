@@ -12,6 +12,10 @@ import 'package:purofessor_mobile/src/features/auth/domain/usecases/register_use
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/pages/login_page.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/pages/register_page.dart';
+import 'package:purofessor_mobile/src/features/champion/data/data_sources/champion_data_source.dart';
+import 'package:purofessor_mobile/src/features/champion/data/repositories/champion_repository_impl.dart';
+import 'package:purofessor_mobile/src/features/champion/presentation/controllers/champion_controller.dart';
+import 'package:purofessor_mobile/src/features/champion/presentation/pages/champion_search_page.dart';
 import 'package:purofessor_mobile/src/features/home/presentation/pages/home_page.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 import 'package:purofessor_mobile/src/features/profile/data/repositories/profile_repository_impl.dart';
@@ -54,6 +58,9 @@ class AppSetup {
       authDataSource,
     );
     final themeController = ThemeController();
+    final championDataSource = ChampionDataSource(httpClient);
+    final championRepository = ChampionRepositoryImpl(championDataSource);
+    final championController = ChampionController(championRepository);
 
     return MultiProvider(
       providers: [
@@ -63,6 +70,9 @@ class AppSetup {
           value: profileController,
         ),
         ChangeNotifierProvider<ThemeController>.value(value: themeController),
+        ChangeNotifierProvider<ChampionController>.value(
+          value: championController,
+        ),
       ],
       child: const MyApp(),
     );
@@ -83,19 +93,30 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.transparent,
         primarySwatch: Colors.deepPurple,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.white,
+          selectedItemColor: Colors.deepPurple,
+          unselectedItemColor: Colors.grey,
+        ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.transparent,
         primarySwatch: Colors.deepPurple,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.black,
+          selectedItemColor: Colors.deepPurpleAccent,
+          unselectedItemColor: Colors.grey,
+        ),
       ),
-      initialRoute: '/home',
+      initialRoute: AppRoutes.home,
       routes: {
         AppRoutes.login: (context) => LoginPage(),
         AppRoutes.register: (context) => RegisterPage(),
         AppRoutes.home: (context) => const HomePage(),
         AppRoutes.settings: (context) => const SettingsPage(),
         AppRoutes.profile: (context) => const ProfilePage(),
+        AppRoutes.championSearch: (context) => const ChampionSearchPage(),
       },
     );
   }

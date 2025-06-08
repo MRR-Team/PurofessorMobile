@@ -5,4 +5,5 @@ class AppRoutes {
   static const guest = '/guest';
   static const settings = '/settings';
   static const profile = '/profile';
+  static const championSearch = '/champion-search';
 }

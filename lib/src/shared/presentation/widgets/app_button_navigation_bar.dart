@@ -22,6 +22,7 @@ class AppBottomNavigationBar extends StatelessWidget {
     final safeIndex = currentIndex >= 0 ? currentIndex : 0;
 
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       currentIndex: safeIndex,
       onTap: (index) {
         final selected = availablePages[index];
@@ -30,7 +31,7 @@ class AppBottomNavigationBar extends StatelessWidget {
       items:
           availablePages.map((page) {
             return BottomNavigationBarItem(
-              icon: const SizedBox(),
+              icon: Icon(Icons.circle),
               label: page.label,
             );
           }).toList(),

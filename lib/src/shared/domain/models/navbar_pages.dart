@@ -1,14 +1,18 @@
-enum NavbarPages { home, settings, profile }
+import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
+
+enum NavbarPages { home, settings, profile, championSearch }
 
 extension NavbarPagesExtension on NavbarPages {
   String get routeName {
     switch (this) {
       case NavbarPages.home:
-        return '/home';
+        return AppRoutes.home;
       case NavbarPages.settings:
-        return '/settings';
+        return AppRoutes.settings;
       case NavbarPages.profile:
-        return '/profile';
+        return AppRoutes.profile;
+      case NavbarPages.championSearch:
+        return AppRoutes.championSearch;
     }
   }
 
@@ -20,6 +24,8 @@ extension NavbarPagesExtension on NavbarPages {
         return 'Ustawienia';
       case NavbarPages.profile:
         return 'Profil';
+      case NavbarPages.championSearch:
+        return 'Championy';
     }
   }
 
@@ -29,6 +35,7 @@ extension NavbarPagesExtension on NavbarPages {
       case NavbarPages.settings:
         return false;
       case NavbarPages.profile:
+      case NavbarPages.championSearch:
         return true;
     }
   }
