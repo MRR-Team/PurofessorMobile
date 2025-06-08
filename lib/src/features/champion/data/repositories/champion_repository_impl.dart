@@ -8,8 +8,14 @@ class ChampionRepositoryImpl implements ChampionRepository {
   ChampionRepositoryImpl(this.dataSource);
 
   @override
-  Future<List<ChampionModel>> getAvailableChampions() async {
-    final data = await dataSource.getAvailableChampions();
+  Future<List<ChampionModel>> getChampions() async {
+    final data = await dataSource.getChampions();
     return data.map((e) => ChampionModel.fromJson(e)).toList();
+  }
+
+  @override
+  Future<ChampionModel> getChampionDetails(int id) async {
+    final data = await dataSource.getChampionDetails(id);
+    return ChampionModel.fromJson(data);
   }
 }
