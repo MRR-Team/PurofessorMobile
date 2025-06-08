@@ -4,8 +4,12 @@ class ChampionModel {
   final String position;
   final String role;
 
-  ChampionModel({required this.id, required this.name, required this.position,     required this.role,
-    });
+  ChampionModel({
+    required this.id,
+    required this.name,
+    required this.position,
+    required this.role,
+  });
 
   factory ChampionModel.fromJson(Map<String, dynamic> json) {
     return ChampionModel(

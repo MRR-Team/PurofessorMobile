@@ -11,11 +11,20 @@ class ChampionInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Nazwa championa: ${champion.name}', style: const TextStyle(color: Colors.white, fontSize: 18)),
+        Text(
+          'Nazwa championa: ${champion.name}',
+          style: const TextStyle(color: Colors.white, fontSize: 18),
+        ),
         const SizedBox(height: 8),
-        Text('Pozycja: ${champion.position}', style: const TextStyle(color: Colors.white, fontSize: 18)),
+        Text(
+          'Pozycja: ${champion.position}',
+          style: const TextStyle(color: Colors.white, fontSize: 18),
+        ),
         const SizedBox(height: 8),
-        Text('Rola: ${champion.role}', style: const TextStyle(color: Colors.white, fontSize: 18)),
+        Text(
+          'Rola: ${champion.role}',
+          style: const TextStyle(color: Colors.white, fontSize: 18),
+        ),
       ],
     );
   }

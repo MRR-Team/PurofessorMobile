@@ -83,6 +83,9 @@ class ChampionController extends ChangeNotifier {
     required String role,
     required int enemyChampionId,
   }) async {
-    return await repository.getCounters(role: role, enemyChampionId: enemyChampionId);
+    return await repository.getCounters(
+      role: role,
+      enemyChampionId: enemyChampionId,
+    );
   }
 }
