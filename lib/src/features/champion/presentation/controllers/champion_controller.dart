@@ -78,4 +78,11 @@ class ChampionController extends ChangeNotifier {
   }
 
   Future<void> load(BuildContext context) => fetchChampions(context);
+
+  Future<List<ChampionModel>> fetchCounters({
+    required String role,
+    required int enemyChampionId,
+  }) async {
+    return await repository.getCounters(role: role, enemyChampionId: enemyChampionId);
+  }
 }
