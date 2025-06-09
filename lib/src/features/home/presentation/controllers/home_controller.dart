@@ -15,7 +15,7 @@ class HomePageModel {
   }
 
   void onFindCounterPressed(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.championSearch);
+    Navigator.pushNamed(context, AppRoutes.buildItems);
   }
 
   void onServerStatusPressed(BuildContext context) {

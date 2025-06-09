@@ -8,8 +8,8 @@ class ChampionAvatar extends StatelessWidget {
   const ChampionAvatar({
     super.key,
     required this.photoUrl,
-    this.size = 52,
-    this.radius = 8,
+    this.size = 32,
+    this.radius = 20,
   });
 
   @override
