@@ -56,10 +56,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
             fullWidth: true,
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                authController.forgotPassword(
-                  context,
-                  emailController.text,
-                );
+                authController.forgotPassword(context, emailController.text);
               }
             },
           ),

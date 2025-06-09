@@ -117,7 +117,7 @@ class LoginForm extends StatelessWidget {
             },
             icon: const Icon(Icons.login),
             label: const Text('Zaloguj przez Google'),
-          )
+          ),
         ],
       ),
     );

@@ -56,8 +56,14 @@ class HomePage extends StatelessWidget {
                         onTap: () => viewPage.onServerStatusPressed(context),
                       ),
                       HomeTile(
-                        label: authController.isLoggedIn ? 'Profil' : 'Zaloguj się',
-                        icon: authController.isLoggedIn ? Icons.person : Icons.login,
+                        label:
+                            authController.isLoggedIn
+                                ? 'Profil'
+                                : 'Zaloguj się',
+                        icon:
+                            authController.isLoggedIn
+                                ? Icons.person
+                                : Icons.login,
                         onTap: () {
                           if (authController.isLoggedIn) {
                             viewPage.onProfilePressed(context);

@@ -22,18 +22,23 @@ class ChampionDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<ChampionModel>(
       value: selectedChampion,
-      items: champions.map((champion) {
-        return DropdownMenuItem(
-          value: champion,
-          child: Row(
-            children: [
-              ChampionAvatar(photoUrl: champion.photo, size: 32, radius: 20),
-              const SizedBox(width: 8),
-              Text(champion.name),
-            ],
-          ),
-        );
-      }).toList(),
+      items:
+          champions.map((champion) {
+            return DropdownMenuItem(
+              value: champion,
+              child: Row(
+                children: [
+                  ChampionAvatar(
+                    photoUrl: champion.photo,
+                    size: 32,
+                    radius: 20,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(champion.name),
+                ],
+              ),
+            );
+          }).toList(),
       onChanged: onChanged,
       decoration: InputDecoration(
         labelText: label,

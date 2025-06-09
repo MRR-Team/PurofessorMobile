@@ -19,7 +19,9 @@ class BuildItemsList extends StatelessWidget {
         final item = items[index];
         return Card(
           margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(

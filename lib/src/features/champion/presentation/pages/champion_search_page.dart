@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -39,17 +38,21 @@ class _ChampionSearchPageState extends State<ChampionSearchPage> {
     final ctrl = context.watch<ChampionController>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Wybierz championa',)),
+      appBar: AppBar(title: const Text('Wybierz championa')),
       bottomNavigationBar: const AppBottomNavigationBar(),
       body: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
           if (scrollNotification is UserScrollNotification) {
-            if (scrollNotification.direction == ScrollDirection.reverse && _showFilters) {
+            if (scrollNotification.direction == ScrollDirection.reverse &&
+                _showFilters) {
               setState(() => _showFilters = false);
-            } else if (scrollNotification.direction == ScrollDirection.forward && !_showFilters) {
+            } else if (scrollNotification.direction ==
+                    ScrollDirection.forward &&
+                !_showFilters) {
               setState(() => _showFilters = true);
             }
-          } else if (scrollNotification is ScrollEndNotification && !_showFilters) {
+          } else if (scrollNotification is ScrollEndNotification &&
+              !_showFilters) {
             setState(() => _showFilters = true);
           }
           return true;
@@ -62,32 +65,35 @@ class _ChampionSearchPageState extends State<ChampionSearchPage> {
                 AnimatedSize(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
-                  child: _showFilters
-                      ? ChampionFilters(
-                    searchCtrl: searchCtrl,
-                    selectedPositions: ctrl.selectedPositions,
-                    onSearchChanged: ctrl.updateQuery,
-                    onTogglePosition: ctrl.togglePosition,
-                  )
-                      : const SizedBox.shrink(),
+                  child:
+                      _showFilters
+                          ? ChampionFilters(
+                            searchCtrl: searchCtrl,
+                            selectedPositions: ctrl.selectedPositions,
+                            onSearchChanged: ctrl.updateQuery,
+                            onTogglePosition: ctrl.togglePosition,
+                          )
+                          : const SizedBox.shrink(),
                 ),
                 Expanded(
-                  child: ctrl.filteredChampions.isEmpty
-                      ? Center(
-                    child: Text(
-                      'Brak wyników',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  )
-                      : ListView.separated(
-                    controller: _scrollController,
-                    itemCount: ctrl.filteredChampions.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 8),
-                    itemBuilder: (_, i) {
-                      final c = ctrl.filteredChampions[i];
-                      return ChampionListItem(champion: c);
-                    },
-                  ),
+                  child:
+                      ctrl.filteredChampions.isEmpty
+                          ? Center(
+                            child: Text(
+                              'Brak wyników',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                          )
+                          : ListView.separated(
+                            controller: _scrollController,
+                            itemCount: ctrl.filteredChampions.length,
+                            separatorBuilder:
+                                (_, __) => const SizedBox(height: 8),
+                            itemBuilder: (_, i) {
+                              final c = ctrl.filteredChampions[i];
+                              return ChampionListItem(champion: c);
+                            },
+                          ),
                 ),
               ],
             ),

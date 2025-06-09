@@ -93,7 +93,9 @@ class AppSetup {
         ChangeNotifierProvider<ChampionController>.value(
           value: championController,
         ),
-        ChangeNotifierProvider<BuildItemsController>.value(value: buildItemsController),
+        ChangeNotifierProvider<BuildItemsController>.value(
+          value: buildItemsController,
+        ),
       ],
       child: const MyApp(),
     );
@@ -144,7 +146,6 @@ class MyApp extends StatelessWidget {
         },
         AppRoutes.forgotPassword: (context) => ForgotPasswordPage(),
         AppRoutes.buildItems: (context) => BuildItemsPage(),
-
       },
     );
   }

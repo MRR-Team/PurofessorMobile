@@ -25,10 +25,10 @@ class HttpClient {
   }
 
   Future<dynamic> post(
-      String path, {
-        Map<String, String>? headers,
-        dynamic body,
-      }) async {
+    String path, {
+    Map<String, String>? headers,
+    dynamic body,
+  }) async {
     try {
       final response = await _client.post(
         Uri.parse('$baseUrl$path'),
@@ -85,13 +85,12 @@ class HttpClient {
         responseBody = json.decode(response.body);
       }
     } catch (e) {
-      print("Failed to decode JSON response body: ${response.body}, Error: $e");
       if (response.statusCode >= 200 && response.statusCode < 300) {
-
         return response.body;
       } else {
         throw HttpException(
-          message: 'Error: ${response.statusCode}. Could not parse error details.',
+          message:
+              'Error: ${response.statusCode}. Could not parse error details.',
           statusCode: response.statusCode,
         );
       }
@@ -100,9 +99,10 @@ class HttpClient {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return responseBody;
     } else {
-      final errorMessage = (responseBody is Map && responseBody.containsKey('message'))
-          ? responseBody['message']
-          : (response.reasonPhrase ?? 'Błąd serwera');
+      final errorMessage =
+          (responseBody is Map && responseBody.containsKey('message'))
+              ? responseBody['message']
+              : (response.reasonPhrase ?? 'Błąd serwera');
       throw HttpException(
         message: errorMessage,
         statusCode: response.statusCode,
