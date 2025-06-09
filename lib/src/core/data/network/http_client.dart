@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:purofessor_mobile/src/core/exceptions/http_exception.dart';
+import 'package:purofessor_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HttpClient {
@@ -11,24 +13,32 @@ class HttpClient {
     : _client = client ?? http.Client();
 
   Future<dynamic> get(String path, {Map<String, String>? headers}) async {
-    final response = await _client.get(
-      Uri.parse('$baseUrl$path'),
-      headers: await _defaultHeaders(headers),
-    );
-    return _handleResponse(response);
+    try {
+      final response = await _client.get(
+        Uri.parse('$baseUrl$path'),
+        headers: await _defaultHeaders(headers),
+      );
+      return _handleResponse(response);
+    } on SocketException {
+      throw NoInternetException();
+    }
   }
 
   Future<dynamic> post(
-    String path, {
-    Map<String, String>? headers,
-    dynamic body,
-  }) async {
-    final response = await _client.post(
-      Uri.parse('$baseUrl$path'),
-      headers: await _defaultHeaders(headers),
-      body: json.encode(body),
-    );
-    return _handleResponse(response);
+      String path, {
+        Map<String, String>? headers,
+        dynamic body,
+      }) async {
+    try {
+      final response = await _client.post(
+        Uri.parse('$baseUrl$path'),
+        headers: await _defaultHeaders(headers),
+        body: json.encode(body),
+      );
+      return _handleResponse(response);
+    } on SocketException {
+      throw NoInternetException();
+    }
   }
 
   Future<dynamic> put(
@@ -69,13 +79,32 @@ class HttpClient {
   }
 
   dynamic _handleResponse(http.Response response) {
-    final body = json.decode(response.body);
+    dynamic responseBody;
+    try {
+      if (response.body.isNotEmpty) {
+        responseBody = json.decode(response.body);
+      }
+    } catch (e) {
+      print("Failed to decode JSON response body: ${response.body}, Error: $e");
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+
+        return response.body;
+      } else {
+        throw HttpException(
+          message: 'Error: ${response.statusCode}. Could not parse error details.',
+          statusCode: response.statusCode,
+        );
+      }
+    }
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      return body;
+      return responseBody;
     } else {
+      final errorMessage = (responseBody is Map && responseBody.containsKey('message'))
+          ? responseBody['message']
+          : (response.reasonPhrase ?? 'Błąd serwera');
       throw HttpException(
-        message: body['message'] ?? 'Błąd serwera',
+        message: errorMessage,
         statusCode: response.statusCode,
       );
     }

@@ -4,9 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:purofessor_mobile/src/core/data/network/http_client.dart';
 
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
+import 'package:purofessor_mobile/src/core/data/network/services/google_auth_service.dart';
 import 'package:purofessor_mobile/src/features/auth/data/data_sources/auth_data_source.dart';
 import 'package:purofessor_mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/forgot_password_usecase.dart';
+import 'package:purofessor_mobile/src/features/auth/domain/usecases/google_login_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/register_usecase.dart';
@@ -51,12 +53,15 @@ class AppSetup {
     final registerUseCase = RegisterUseCase(authRepository);
     final logoutUseCase = LogoutUseCase(authRepository);
     final forgotPasswordUseCase = ForgotPasswordUseCase(authRepository);
+    final googleAuthService = GoogleAuthService(httpClient);
+    final googleLoginUseCase = GoogleLoginUseCase(googleAuthService);
 
     final authController = AuthController(
       loginUseCase: loginUseCase,
       registerUseCase: registerUseCase,
       logoutUseCase: logoutUseCase,
       forgotPasswordUseCase: forgotPasswordUseCase,
+      googleLoginUseCase: googleLoginUseCase,
     );
     await authController.loadUser();
 
