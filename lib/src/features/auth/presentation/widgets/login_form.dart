@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 
@@ -41,6 +42,17 @@ class LoginForm extends StatelessWidget {
             },
           ),
           const SizedBox(height: 16),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Button(
+              label: 'Zapomniałeś hasła?',
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.forgotPassword);
+              },
+              fullWidth: false,
+            ),
+          ),
+          const SizedBox(height: 16),
           TextFormField(
             controller: passwordController,
             obscureText: true,
@@ -74,7 +86,7 @@ class LoginForm extends StatelessWidget {
             },
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
 
           TextButton(
             onPressed: () {
@@ -85,6 +97,8 @@ class LoginForm extends StatelessWidget {
               style: TextStyle(color: Colors.white70),
             ),
           ),
+
+          const SizedBox(height: 32),
 
           TextButton(
             onPressed: () {

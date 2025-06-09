@@ -47,4 +47,11 @@ class AuthDataSource {
     final response = await httpClient.get('/api/users/$id');
     return User.fromJson(response);
   }
+
+  Future<void> forgotPassword(String email) async {
+    await httpClient.post(
+      '/api/forgot-password',
+      body: {'email': email},
+    );
+  }
 }
