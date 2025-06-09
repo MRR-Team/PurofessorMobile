@@ -26,8 +26,28 @@ class ChampionDetailsPage extends StatelessWidget {
         }
 
         if (snapshot.hasError || !snapshot.hasData) {
-          return const Scaffold(
-            body: Center(child: Text('Nie udało się załadować championa')),
+          return Scaffold(
+          appBar: AppBar(title: const Text('Szczegóły championa')),
+          bottomNavigationBar: const AppBottomNavigationBar(),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Nie udało się załadować championa.',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Spróbuj ponownie'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ),
           );
         }
 

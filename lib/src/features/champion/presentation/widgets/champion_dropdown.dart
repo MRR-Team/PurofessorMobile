@@ -29,7 +29,7 @@ class ChampionDropdown extends StatelessWidget {
             children: [
               ChampionAvatar(photoUrl: champion.photo, size: 32, radius: 20),
               const SizedBox(width: 8),
-              Text(champion.name, style: const TextStyle(color: Colors.white)),
+              Text(champion.name),
             ],
           ),
         );
