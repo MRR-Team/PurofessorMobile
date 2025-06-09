@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:purofessor_mobile/src/core/exceptions/auth_exception.dart';
+import 'package:purofessor_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/forgot_password_usecase.dart';
+import 'package:purofessor_mobile/src/features/auth/domain/usecases/google_login_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/register_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/login_usecase.dart';
@@ -14,12 +18,14 @@ class AuthController extends ChangeNotifier {
   final RegisterUseCase registerUseCase;
   final LogoutUseCase logoutUseCase;
   final ForgotPasswordUseCase forgotPasswordUseCase;
+  final GoogleLoginUseCase googleLoginUseCase;
 
   AuthController({
     required this.loginUseCase,
     required this.registerUseCase,
     required this.logoutUseCase,
     required this.forgotPasswordUseCase,
+    required this.googleLoginUseCase,
   });
 
   bool _isLoading = false;
@@ -51,6 +57,14 @@ class AuthController extends ChangeNotifier {
       messenger.showSnackBar(
         const SnackBar(content: Text('Zalogowano pomyślnie')),
       );
+    } on NoInternetException catch (e) {
+      if (context.mounted) {
+        _showError(context, e.message);
+      }
+    } on AuthException catch (e) {
+      if (context.mounted) {
+        _showError(context, e.message);
+      }
     } on HttpException catch (e) {
       if (context.mounted) {
         _showError(context, e.message);
@@ -111,6 +125,10 @@ class AuthController extends ChangeNotifier {
 
       _user = null;
 
+      try {
+        await GoogleSignIn().signOut();
+      } catch (_) {}
+
       if (context.mounted) {
         navigator.pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
       }
@@ -149,7 +167,9 @@ class AuthController extends ChangeNotifier {
       if (context.mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Link do resetu hasła został wysłany na email')),
+          const SnackBar(
+            content: Text('Link do resetu hasła został wysłany na email'),
+          ),
         );
       }
     } on HttpException catch (e) {
@@ -160,6 +180,39 @@ class AuthController extends ChangeNotifier {
       if (context.mounted) {
         _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
       }
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> loginWithGoogle(BuildContext context) async {
+    final navigator = Navigator.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final user = await googleLoginUseCase();
+      _user = user;
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('user', jsonEncode(user.toJson()));
+
+      if (!context.mounted) return;
+
+      navigator.pushReplacementNamed(AppRoutes.home);
+      messenger.showSnackBar(
+        const SnackBar(content: Text('Zalogowano przez Google')),
+      );
+    } on NoInternetException catch (e) {
+      _showError(context, e.message);
+    } on HttpException catch (e) {
+      _showError(context, e.message);
+    } catch (e) {
+      debugPrint('Google login error: $e');
+      _showError(context, 'Logowanie przez Google nie powiodło się.');
     }
 
     _isLoading = false;

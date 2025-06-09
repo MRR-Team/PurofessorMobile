@@ -1,5 +1,7 @@
+import 'package:purofessor_mobile/src/shared/domain/models/user_model.dart';
+
 abstract class AuthRepository {
-  Future<void> login(String email, String password);
+  Future<User> login(String email, String password);
   Future<void> register(
     String email,
     String name,

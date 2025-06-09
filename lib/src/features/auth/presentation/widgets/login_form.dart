@@ -110,6 +110,14 @@ class LoginForm extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ElevatedButton.icon(
+            onPressed: () {
+              context.read<AuthController>().loginWithGoogle(context);
+            },
+            icon: const Icon(Icons.login),
+            label: const Text('Zaloguj przez Google'),
+          )
         ],
       ),
     );
