@@ -17,7 +17,7 @@ class AppBackground extends StatelessWidget {
           colors:
               isDark
                   ? [Colors.black, Colors.grey.shade900]
-                  : [Colors.deepPurple, Colors.deepPurpleAccent],
+                  : [Colors.deepPurple.shade400, Colors.deepPurpleAccent],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
