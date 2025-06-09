@@ -37,23 +37,25 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
 
     final buildItemsController = context.read<BuildItemsController>();
 
-    try {
-      await buildItemsController.loadBuildItems(
-        _selectedEnemyChampion!.id,
-        _selectedChampion!.id,
-      );
-    } catch (_) {
+    await buildItemsController.loadBuildItems(
+      _selectedEnemyChampion!.id,
+      _selectedChampion!.id,
+    );
+
+    if (!mounted) return;
+
+    if (buildItemsController.state == BuildItemsState.error) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Nie udało się pobrać build items.'),
+        SnackBar(
+          content: Text(buildItemsController.errorMessage ?? 'Nie udało się pobrać build items.'),
           backgroundColor: Colors.red,
         ),
       );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
     }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override

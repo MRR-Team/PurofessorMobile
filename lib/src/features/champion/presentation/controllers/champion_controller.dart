@@ -55,16 +55,16 @@ class ChampionController extends ChangeNotifier {
   }
 
   void applyFilters() {
-    _filtered =
-        _champions.where((champ) {
-          final matchesQuery = champ.name.toLowerCase().startsWith(query);
-          final matchesPosition =
-              selectedPositions.isEmpty ||
+    _filtered = _champions.where((champ) {
+      final matchesQuery = champ.name.toLowerCase().startsWith(query);
+      final matchesPosition =
+          selectedPositions.isEmpty ||
               selectedPositions
                   .map((e) => e.toLowerCase())
                   .contains(champ.position.toLowerCase());
-          return matchesQuery && matchesPosition;
-        }).toList();
+      return matchesQuery && matchesPosition;
+    }).toList()
+      ..sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
     notifyListeners();
   }
