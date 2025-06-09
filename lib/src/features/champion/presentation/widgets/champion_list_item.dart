@@ -26,11 +26,7 @@ class ChampionListItem extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
-              ChampionAvatar(
-                photoUrl: champion.photo,
-                size: 64,
-                radius: 12,
-              ),
+              ChampionAvatar(photoUrl: champion.photo, size: 64, radius: 12),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(

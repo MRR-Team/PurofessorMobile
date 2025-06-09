@@ -15,9 +15,7 @@ class ForgotPasswordPage extends StatelessWidget {
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 400),
-              child: SingleChildScrollView(
-                child: ForgotPasswordForm(),
-              ),
+              child: SingleChildScrollView(child: ForgotPasswordForm()),
             ),
           ),
         ),

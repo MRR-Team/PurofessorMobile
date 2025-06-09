@@ -47,7 +47,10 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
     if (buildItemsController.state == BuildItemsState.error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(buildItemsController.errorMessage ?? 'Nie udało się pobrać build items.'),
+          content: Text(
+            buildItemsController.errorMessage ??
+                'Nie udało się pobrać build items.',
+          ),
           backgroundColor: Colors.red,
         ),
       );
@@ -81,20 +84,20 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
               ChampionDropdown(
                 champions: championController.champions,
                 selectedChampion: _selectedEnemyChampion,
-                onChanged: (value) => setState(() => _selectedEnemyChampion = value),
+                onChanged:
+                    (value) => setState(() => _selectedEnemyChampion = value),
                 label: 'Wrogi champion',
               ),
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: _isLoading ? null : _generateBuild,
-                child: _isLoading
-                    ? const CircularProgressIndicator()
-                    : const Text('Generuj build'),
+                child:
+                    _isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text('Generuj build'),
               ),
               const SizedBox(height: 24),
-              Expanded(
-                child: _buildBody(buildItemsController),
-              ),
+              Expanded(child: _buildBody(buildItemsController)),
             ],
           ),
         ),
@@ -105,7 +108,9 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
   Widget _buildBody(BuildItemsController buildItemsController) {
     switch (buildItemsController.state) {
       case BuildItemsState.initial:
-        return const Center(child: Text('Wybierz championów i wygeneruj build.'));
+        return const Center(
+          child: Text('Wybierz championów i wygeneruj build.'),
+        );
       case BuildItemsState.loading:
         return const Center(child: CircularProgressIndicator());
       case BuildItemsState.loaded:

@@ -6,8 +6,13 @@ class BuildItemsDataSource {
 
   BuildItemsDataSource(this.httpClient);
 
-  Future<List<BuildItem>> fetchBuildItems(int enemyChampionId, int championId) async {
-    final response = await httpClient.get('/api/build/$enemyChampionId/against/$championId');
+  Future<List<BuildItem>> fetchBuildItems(
+    int enemyChampionId,
+    int championId,
+  ) async {
+    final response = await httpClient.get(
+      '/api/build/$enemyChampionId/against/$championId',
+    );
     return (response as List)
         .map((json) => BuildItem.fromJson(Map<String, dynamic>.from(json)))
         .toList();

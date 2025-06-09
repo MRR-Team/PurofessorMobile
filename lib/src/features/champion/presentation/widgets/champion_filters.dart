@@ -20,10 +20,7 @@ class ChampionFilters extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ChampionSearchBar(
-          controller: searchCtrl,
-          onChanged: onSearchChanged,
-        ),
+        ChampionSearchBar(controller: searchCtrl, onChanged: onSearchChanged),
         const SizedBox(height: 12),
         PositionFilter(
           options: ['Top', 'Jungle', 'Mid', 'Bot', 'Support'],

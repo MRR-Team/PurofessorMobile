@@ -9,9 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class GoogleAuthService {
   final HttpClient httpClient;
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: ['email', 'profile'],
-  );
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
 
   GoogleAuthService(this.httpClient);
 
@@ -23,16 +21,17 @@ class GoogleAuthService {
         throw Exception('Logowanie Google anulowane przez użytkownika');
       }
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final String? idToken = googleAuth.idToken;
 
       if (idToken == null) {
-        throw Exception('Nie udało się uzyskać idToken od Google. Spróbuj ponownie.');
+        throw Exception(
+          'Nie udało się uzyskać idToken od Google. Spróbuj ponownie.',
+        );
       }
 
-      final response = await httpClient.get(
-        '/api/auth/callback/google',
-      );
+      final response = await httpClient.get('/api/auth/callback/google');
 
       final userJson = response['user'];
       final token = response['token'];
@@ -57,6 +56,4 @@ class GoogleAuthService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
   }
-
-
 }
