@@ -59,13 +59,18 @@ class _ChampionSearchPageState extends State<ChampionSearchPage> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                if (_showFilters)
-                  ChampionFilters(
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  child: _showFilters
+                      ? ChampionFilters(
                     searchCtrl: searchCtrl,
                     selectedPositions: ctrl.selectedPositions,
                     onSearchChanged: ctrl.updateQuery,
                     onTogglePosition: ctrl.togglePosition,
-                  ),
+                  )
+                      : const SizedBox.shrink(),
+                ),
                 Expanded(
                   child: ctrl.filteredChampions.isEmpty
                       ? Center(

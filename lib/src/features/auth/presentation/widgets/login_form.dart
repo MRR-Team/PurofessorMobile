@@ -86,18 +86,6 @@ class LoginForm extends StatelessWidget {
             },
           ),
 
-          const SizedBox(height: 20),
-
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/guest');
-            },
-            child: const Text(
-              'Wejdź jako gość',
-              style: TextStyle(color: Colors.white70),
-            ),
-          ),
-
           const SizedBox(height: 32),
 
           TextButton(

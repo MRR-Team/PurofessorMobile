@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
 import 'package:purofessor_mobile/src/features/home/presentation/controllers/home_controller.dart';
-import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
+import 'package:purofessor_mobile/src/features/home/presentation/widgets/home_tile.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
@@ -13,29 +13,63 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewPage = HomePageModel();
+    final authController = context.watch<AuthController>();
 
     return Scaffold(
       bottomNavigationBar: AppBottomNavigationBar(),
       body: AppBackground(
         child: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(height: 16),
-              Text(
-                AppConstants.appName,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 16),
+                Text(
+                  AppConstants.appName,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-
-              if (!context.watch<AuthController>().isLoggedIn)
-                Button(
-                  label: 'Przejdź do logowania',
-                  onPressed: () => viewPage.onLoginPressed(context),
+                const SizedBox(height: 32),
+                Expanded(
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    children: [
+                      HomeTile(
+                        label: 'Znajdź kontrę',
+                        icon: Icons.search,
+                        onTap: () => viewPage.onFindCounterPressed(context),
+                      ),
+                      HomeTile(
+                        label: 'Championy',
+                        icon: Icons.person_search,
+                        onTap: () => viewPage.onChampionsPressed(context),
+                      ),
+                      HomeTile(
+                        label: 'Status serwera',
+                        icon: Icons.cloud_outlined,
+                        onTap: () => viewPage.onServerStatusPressed(context),
+                      ),
+                      HomeTile(
+                        label: authController.isLoggedIn ? 'Profil' : 'Zaloguj się',
+                        icon: authController.isLoggedIn ? Icons.person : Icons.login,
+                        onTap: () {
+                          if (authController.isLoggedIn) {
+                            viewPage.onProfilePressed(context);
+                          } else {
+                            viewPage.onLoginPressed(context);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-
-              const Spacer(),
-            ],
+              ],
+            ),
           ),
         ),
       ),
