@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:purofessor_mobile/src/features/auth/domain/usecases/forgot_password_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/register_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/login_usecase.dart';
@@ -12,11 +13,13 @@ class AuthController extends ChangeNotifier {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
   final LogoutUseCase logoutUseCase;
+  final ForgotPasswordUseCase forgotPasswordUseCase;
 
   AuthController({
     required this.loginUseCase,
     required this.registerUseCase,
     required this.logoutUseCase,
+    required this.forgotPasswordUseCase,
   });
 
   bool _isLoading = false;
@@ -133,6 +136,33 @@ class AuthController extends ChangeNotifier {
     } else {
       _user = null;
     }
+    notifyListeners();
+  }
+
+  Future<void> forgotPassword(BuildContext context, String email) async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      await forgotPasswordUseCase(email);
+
+      if (context.mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Link do resetu hasła został wysłany na email')),
+        );
+      }
+    } on HttpException catch (e) {
+      if (context.mounted) {
+        _showError(context, e.message);
+      }
+    } catch (_) {
+      if (context.mounted) {
+        _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
+      }
+    }
+
+    _isLoading = false;
     notifyListeners();
   }
 

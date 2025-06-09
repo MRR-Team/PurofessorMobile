@@ -6,10 +6,12 @@ import 'package:purofessor_mobile/src/core/data/network/http_client.dart';
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
 import 'package:purofessor_mobile/src/features/auth/data/data_sources/auth_data_source.dart';
 import 'package:purofessor_mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:purofessor_mobile/src/features/auth/domain/usecases/forgot_password_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/login_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/domain/usecases/register_usecase.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:purofessor_mobile/src/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/pages/login_page.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:purofessor_mobile/src/features/champion/data/data_sources/champion_data_source.dart';
@@ -43,11 +45,13 @@ class AppSetup {
     final loginUseCase = LoginUseCase(authRepository);
     final registerUseCase = RegisterUseCase(authRepository);
     final logoutUseCase = LogoutUseCase(authRepository);
+    final forgotPasswordUseCase = ForgotPasswordUseCase(authRepository);
 
     final authController = AuthController(
       loginUseCase: loginUseCase,
       registerUseCase: registerUseCase,
       logoutUseCase: logoutUseCase,
+      forgotPasswordUseCase: forgotPasswordUseCase,
     );
     await authController.loadUser();
 
@@ -122,6 +126,7 @@ class MyApp extends StatelessWidget {
           final args = ModalRoute.of(context)!.settings.arguments as int;
           return ChampionDetailsPage(championId: args);
         },
+        AppRoutes.forgotPassword: (context) => ForgotPasswordPage(),
       },
     );
   }
