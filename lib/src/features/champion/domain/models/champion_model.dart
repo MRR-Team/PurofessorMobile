@@ -3,12 +3,14 @@ class ChampionModel {
   final String name;
   final String position;
   final String role;
+  final String photo;
 
   ChampionModel({
     required this.id,
     required this.name,
     required this.position,
     required this.role,
+    required this.photo,
   });
 
   factory ChampionModel.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class ChampionModel {
       name: json['name'],
       position: json['position'],
       role: json['role'],
+      photo: json['photo'] ?? "https://via.placeholder.com/150",
     );
   }
 
@@ -25,5 +28,6 @@ class ChampionModel {
     'name': name,
     'position': position,
     'role': role,
+    'photo': photo,
   };
 }

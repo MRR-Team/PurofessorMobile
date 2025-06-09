@@ -18,7 +18,8 @@ class ChampionSearchBar extends StatelessWidget {
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         hintText: 'Wybierz championa...',
-        prefixIcon: const Icon(Icons.search),
+        hintStyle: const TextStyle(color: Colors.white70),
+        prefixIcon: const Icon(Icons.search, color: Colors.white70),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
