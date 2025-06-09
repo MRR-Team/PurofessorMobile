@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/models/champion_model.dart';
+import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_avatar.dart';
 
 class ChampionInfo extends StatelessWidget {
   final ChampionModel champion;
@@ -11,6 +12,14 @@ class ChampionInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Center(
+          child: ChampionAvatar(
+            photoUrl: champion.photo,
+            size: 100,
+            radius: 12,
+          ),
+        ),
+        const SizedBox(height: 12),
         Text(
           'Nazwa championa: ${champion.name}',
           style: const TextStyle(color: Colors.white, fontSize: 18),
