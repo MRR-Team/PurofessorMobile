@@ -21,6 +21,11 @@ import 'package:purofessor_mobile/src/features/champion/presentation/pages/champ
 import 'package:purofessor_mobile/src/features/champion/presentation/pages/champion_search_page.dart';
 import 'package:purofessor_mobile/src/features/home/presentation/pages/home_page.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
+import 'package:purofessor_mobile/src/features/item_build/data/data_sources/build_item_data_source.dart';
+import 'package:purofessor_mobile/src/features/item_build/data/repositories/build_items_repository_impl.dart';
+import 'package:purofessor_mobile/src/features/item_build/domain/usecases/get_build_items_usecase.dart';
+import 'package:purofessor_mobile/src/features/item_build/presentation/controllers/build_items_controller.dart';
+import 'package:purofessor_mobile/src/features/item_build/presentation/pages/build_items_page.dart';
 import 'package:purofessor_mobile/src/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:purofessor_mobile/src/features/profile/domain/usecases/update_profile_usecase.dart';
 import 'package:purofessor_mobile/src/features/profile/presentation/controllers/profile_controller.dart';
@@ -67,6 +72,11 @@ class AppSetup {
     final championRepository = ChampionRepositoryImpl(championDataSource);
     final championController = ChampionController(championRepository);
 
+    final buildItemsDataSource = BuildItemsDataSource(httpClient);
+    final buildItemsRepository = BuildItemsRepositoryImpl(buildItemsDataSource);
+    final getBuildItemsUsecase = GetBuildItemsUsecase(buildItemsRepository);
+    final buildItemsController = BuildItemsController(getBuildItemsUsecase);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthController>.value(value: authController),
@@ -78,6 +88,7 @@ class AppSetup {
         ChangeNotifierProvider<ChampionController>.value(
           value: championController,
         ),
+        ChangeNotifierProvider<BuildItemsController>.value(value: buildItemsController),
       ],
       child: const MyApp(),
     );
@@ -127,6 +138,8 @@ class MyApp extends StatelessWidget {
           return ChampionDetailsPage(championId: args);
         },
         AppRoutes.forgotPassword: (context) => ForgotPasswordPage(),
+        AppRoutes.buildItems: (context) => BuildItemsPage(),
+
       },
     );
   }

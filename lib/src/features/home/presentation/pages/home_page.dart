@@ -39,11 +39,12 @@ class HomePage extends StatelessWidget {
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                     children: [
-                      HomeTile(
-                        label: 'Znajdź kontrę',
-                        icon: Icons.search,
-                        onTap: () => viewPage.onFindCounterPressed(context),
-                      ),
+                      if (authController.isLoggedIn)
+                        HomeTile(
+                          label: 'Wygeneruj build',
+                          icon: Icons.search,
+                          onTap: () => viewPage.onFindCounterPressed(context),
+                        ),
                       HomeTile(
                         label: 'Championy',
                         icon: Icons.person_search,
