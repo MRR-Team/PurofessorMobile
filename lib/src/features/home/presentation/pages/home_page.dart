@@ -6,7 +6,7 @@ import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

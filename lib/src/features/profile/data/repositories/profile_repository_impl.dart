@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:purofessor_mobile/src/core/data/network/http_client.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final HttpClient httpClient;
