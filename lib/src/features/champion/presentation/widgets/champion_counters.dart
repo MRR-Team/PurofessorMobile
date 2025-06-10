@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/models/champion_model.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/controllers/champion_controller.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_avatar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChampionCounters extends StatelessWidget {
   final ChampionModel champion;
@@ -12,6 +13,7 @@ class ChampionCounters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = context.read<ChampionController>();
+    final localizations = AppLocalizations.of(context)!;
 
     return FutureBuilder<List<ChampionModel>>(
       future: controller.fetchCounters(
@@ -33,13 +35,13 @@ class ChampionCounters extends StatelessWidget {
           children: [
             const SizedBox(height: 16),
             Text(
-              'Kontry na ${champion.name}:',
+              '${localizations.countersTitle} ${champion.name}:',
               style: const TextStyle(color: Colors.amber, fontSize: 18),
             ),
             const SizedBox(height: 8),
             if (counters.isEmpty)
-              const Text(
-                'Brak danych o kontrach.',
+              Text(
+                localizations.noCountersData,
                 style: TextStyle(color: Colors.white),
               )
             else

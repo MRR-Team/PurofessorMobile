@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/shared/domain/models/user_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileInfoCard extends StatelessWidget {
   final User user;
@@ -8,6 +9,7 @@ class ProfileInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Card(
       margin: const EdgeInsets.all(16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -17,7 +19,7 @@ class ProfileInfoCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Nazwa użytkownika: ${user.name}',
+              '${localizations.userName} ${user.name}',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),

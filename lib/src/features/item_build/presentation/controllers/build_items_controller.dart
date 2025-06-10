@@ -4,6 +4,7 @@ import 'package:purofessor_mobile/src/features/item_build/domain/usecases/get_bu
 import 'package:purofessor_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:purofessor_mobile/src/core/exceptions/http_exception.dart';
 import 'package:purofessor_mobile/src/core/exceptions/message_exception.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum BuildItemsState { initial, loading, loaded, error }
 
@@ -21,7 +22,11 @@ class BuildItemsController extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  Future<void> loadBuildItems(int enemyChampionId, int championId) async {
+  Future<void> loadBuildItems(
+    int enemyChampionId,
+    int championId,
+    AppLocalizations localizations,
+  ) async {
     _state = BuildItemsState.loading;
     notifyListeners();
 
@@ -39,7 +44,7 @@ class BuildItemsController extends ChangeNotifier {
       _errorMessage = e.message;
       _state = BuildItemsState.error;
     } catch (_) {
-      _errorMessage = 'Coś poszło nie tak. Spróbuj ponownie.';
+      _errorMessage = localizations.unknownError;
       _state = BuildItemsState.error;
     }
 

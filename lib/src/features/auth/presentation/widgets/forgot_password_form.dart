@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPasswordForm extends StatefulWidget {
   const ForgotPasswordForm({super.key});
@@ -23,6 +24,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
   @override
   Widget build(BuildContext context) {
     final authController = Provider.of<AuthController>(context);
+    final localizations = AppLocalizations.of(context)!;
 
     return Form(
       key: formKey,
@@ -30,7 +32,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Podaj email, na który wyślemy link do resetu hasła:',
+            localizations.forgotPasswordEmailInstruction,
             style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
@@ -38,20 +40,20 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
           TextFormField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              labelText: 'Email',
+            decoration: InputDecoration(
+              labelText: localizations.emailLabel,
               prefixIcon: Icon(Icons.email_outlined),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Podaj email';
+                return localizations.emailRequiredError;
               }
               return null;
             },
           ),
           const SizedBox(height: 24),
           Button(
-            label: 'Wyślij link resetujący',
+            label: localizations.sendResetLinkButton,
             isLoading: authController.isLoading,
             fullWidth: true,
             onPressed: () {

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -19,6 +20,7 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = Provider.of<AuthController>(context);
+    final localizations = AppLocalizations.of(context)!;
 
     return Form(
       key: formKey,
@@ -29,14 +31,14 @@ class LoginForm extends StatelessWidget {
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
             style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              labelText: 'Email',
+            decoration: InputDecoration(
+              labelText: localizations.emailLabel,
               labelStyle: TextStyle(color: Colors.white70),
               prefixIcon: Icon(Icons.email_outlined, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Podaj email';
+                return localizations.emailRequiredError;
               }
               return null;
             },
@@ -45,7 +47,7 @@ class LoginForm extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Button(
-              label: 'Zapomniałeś hasła?',
+              label: localizations.forgotPassword,
               onPressed: () {
                 Navigator.pushNamed(context, AppRoutes.forgotPassword);
               },
@@ -57,14 +59,14 @@ class LoginForm extends StatelessWidget {
             controller: passwordController,
             obscureText: true,
             style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              labelText: 'Hasło',
+            decoration: InputDecoration(
+              labelText: localizations.passwordLabel,
               labelStyle: TextStyle(color: Colors.white70),
               prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Podaj hasło';
+                return localizations.passwordRequiredError;
               }
               return null;
             },
@@ -72,7 +74,7 @@ class LoginForm extends StatelessWidget {
           const SizedBox(height: 24),
 
           Button(
-            label: 'Zaloguj się',
+            label: localizations.loginTitle,
             isLoading: authController.isLoading,
             fullWidth: true,
             onPressed: () {
@@ -92,13 +94,13 @@ class LoginForm extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, '/register');
             },
-            child: const Text.rich(
+            child: Text.rich(
               TextSpan(
-                text: 'Nie masz konta? ',
+                text: localizations.noAccount,
                 style: TextStyle(color: Colors.white70),
                 children: [
                   TextSpan(
-                    text: 'Zarejestruj się',
+                    text: localizations.registerButton,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -116,7 +118,7 @@ class LoginForm extends StatelessWidget {
               context.read<AuthController>().loginWithGoogle(context);
             },
             icon: const Icon(Icons.login),
-            label: const Text('Zaloguj przez Google'),
+            label: Text(localizations.loginWithGoogle),
           ),
         ],
       ),

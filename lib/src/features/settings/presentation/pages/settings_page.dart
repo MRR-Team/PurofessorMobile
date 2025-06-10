@@ -5,42 +5,53 @@ import 'package:purofessor_mobile/src/features/auth/presentation/widgets/logout_
 import 'package:purofessor_mobile/src/shared/presentation/controllers/theme_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
+import 'package:purofessor_mobile/src/shared/presentation/widgets/change_language.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('Ustawienia')),
+      appBar: AppBar(title: Text(localizations.settingsTitle)),
       bottomNavigationBar: AppBottomNavigationBar(),
       body: AppBackground(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Ciemny motyw',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 12),
-              Consumer<ThemeController>(
-                builder: (context, controller, _) {
-                  final isDark = controller.themeMode == ThemeMode.dark;
-                  return Switch(
-                    value: isDark,
-                    onChanged: (value) {
-                      controller.toggleTheme(value);
-                    },
-                  );
-                },
-              ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  localizations.darkMode,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+                const SizedBox(height: 12),
+                Consumer<ThemeController>(
+                  builder: (context, controller, _) {
+                    final isDark = controller.themeMode == ThemeMode.dark;
+                    return Switch(
+                      value: isDark,
+                      onChanged: (value) {
+                        controller.toggleTheme(value);
+                      },
+                    );
+                  },
+                ),
 
-              if (context.watch<AuthController>().isLoggedIn) ...[
                 const SizedBox(height: 32),
-                const LogoutButton(),
+
+                const ChangeLanguage(),
+
+                if (context.watch<AuthController>().isLoggedIn) ...[
+                  const SizedBox(height: 32),
+                  LogoutButton(),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),

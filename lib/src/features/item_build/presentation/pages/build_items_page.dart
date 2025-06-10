@@ -7,6 +7,7 @@ import 'package:purofessor_mobile/src/features/item_build/presentation/controlle
 import 'package:purofessor_mobile/src/features/item_build/presentation/widgets/build_items_list.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BuildItemsPage extends StatefulWidget {
   const BuildItemsPage({super.key});
@@ -30,7 +31,7 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
 
   Future<void> _generateBuild() async {
     if (_selectedChampion == null || _selectedEnemyChampion == null) return;
-
+    final localizations = AppLocalizations.of(context)!;
     setState(() {
       _isLoading = true;
     });
@@ -40,6 +41,7 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
     await buildItemsController.loadBuildItems(
       _selectedEnemyChampion!.id,
       _selectedChampion!.id,
+      localizations,
     );
 
     if (!mounted) return;
@@ -49,7 +51,7 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
         SnackBar(
           content: Text(
             buildItemsController.errorMessage ??
-                'Nie udało się pobrać build items.',
+                localizations.failedToFetchBuildItems,
           ),
           backgroundColor: Colors.red,
         ),
@@ -65,9 +67,10 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
   Widget build(BuildContext context) {
     final championController = context.watch<ChampionController>();
     final buildItemsController = context.watch<BuildItemsController>();
+    final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Build Items')),
+      appBar: AppBar(title: Text(localizations.homeGenerateBuild)),
       bottomNavigationBar: AppBottomNavigationBar(),
       body: AppBackground(
         child: Padding(
@@ -78,7 +81,7 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
                 champions: championController.champions,
                 selectedChampion: _selectedChampion,
                 onChanged: (value) => setState(() => _selectedChampion = value),
-                label: 'Twój champion',
+                label: localizations.yourChampion,
               ),
               const SizedBox(height: 16),
               ChampionDropdown(
@@ -86,7 +89,7 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
                 selectedChampion: _selectedEnemyChampion,
                 onChanged:
                     (value) => setState(() => _selectedEnemyChampion = value),
-                label: 'Wrogi champion',
+                label: localizations.enemyChampion,
               ),
               const SizedBox(height: 24),
               ElevatedButton(
@@ -94,7 +97,7 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
                 child:
                     _isLoading
                         ? const CircularProgressIndicator()
-                        : const Text('Generuj build'),
+                        : Text(localizations.generateBuild),
               ),
               const SizedBox(height: 24),
               Expanded(child: _buildBody(buildItemsController)),
@@ -106,18 +109,19 @@ class _BuildItemsPageState extends State<BuildItemsPage> {
   }
 
   Widget _buildBody(BuildItemsController buildItemsController) {
+    final localizations = AppLocalizations.of(context)!;
     switch (buildItemsController.state) {
       case BuildItemsState.initial:
-        return const Center(
-          child: Text('Wybierz championów i wygeneruj build.'),
-        );
+        return Center(child: Text(localizations.selectChampionsToGenerate));
       case BuildItemsState.loading:
         return const Center(child: CircularProgressIndicator());
       case BuildItemsState.loaded:
         return BuildItemsList(items: buildItemsController.items);
       case BuildItemsState.error:
         return Center(
-          child: Text(buildItemsController.errorMessage ?? 'Wystąpił błąd.'),
+          child: Text(
+            buildItemsController.errorMessage ?? localizations.unknownError,
+          ),
         );
     }
   }

@@ -12,6 +12,7 @@ import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 import 'package:purofessor_mobile/src/core/exceptions/http_exception.dart';
 import 'package:purofessor_mobile/src/shared/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AuthController extends ChangeNotifier {
   final LoginUseCase loginUseCase;
@@ -43,7 +44,7 @@ class AuthController extends ChangeNotifier {
   ) async {
     final navigator = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
-
+    final localizations = AppLocalizations.of(context)!;
     _isLoading = true;
     notifyListeners();
 
@@ -55,7 +56,7 @@ class AuthController extends ChangeNotifier {
 
       navigator.pushReplacementNamed(AppRoutes.home);
       messenger.showSnackBar(
-        const SnackBar(content: Text('Zalogowano pomyślnie')),
+        SnackBar(content: Text(localizations.loginSuccess)),
       );
     } on NoInternetException catch (e) {
       if (context.mounted) {
@@ -71,7 +72,7 @@ class AuthController extends ChangeNotifier {
       }
     } catch (_) {
       if (context.mounted) {
-        _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
+        _showError(context, localizations.unknownError);
       }
     }
 
@@ -88,22 +89,21 @@ class AuthController extends ChangeNotifier {
   ) async {
     _isLoading = true;
     notifyListeners();
-
+    final localizations = AppLocalizations.of(context)!;
     try {
       await registerUseCase(email, name, password, confirmPassword);
-
       if (!context.mounted) return;
 
       Navigator.pushReplacementNamed(context, AppRoutes.login);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Zarejestrowano pomyślnie')));
+      ).showSnackBar(SnackBar(content: Text(localizations.loginSuccess)));
     } on HttpException catch (e) {
       if (!context.mounted) return;
       _showError(context, e.message);
     } catch (_) {
       if (!context.mounted) return;
-      _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
+      _showError(context, localizations.unknownError);
     }
 
     _isLoading = false;
@@ -112,13 +112,12 @@ class AuthController extends ChangeNotifier {
 
   Future<void> logout(BuildContext context) async {
     final navigator = Navigator.of(context);
-
+    final localizations = AppLocalizations.of(context)!;
     _isLoading = true;
     notifyListeners();
 
     try {
       await logoutUseCase();
-
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('token');
       await prefs.remove('user');
@@ -138,7 +137,7 @@ class AuthController extends ChangeNotifier {
       }
     } catch (_) {
       if (context.mounted) {
-        _showError(context, 'Błąd wylogowywania.');
+        _showError(context, localizations.logoutError);
       }
     }
 
@@ -160,17 +159,16 @@ class AuthController extends ChangeNotifier {
   Future<void> forgotPassword(BuildContext context, String email) async {
     _isLoading = true;
     notifyListeners();
+    final localizations = AppLocalizations.of(context)!;
 
     try {
       await forgotPasswordUseCase(email);
 
       if (context.mounted) {
         Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Link do resetu hasła został wysłany na email'),
-          ),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(localizations.restPasswordLink)));
       }
     } on HttpException catch (e) {
       if (context.mounted) {
@@ -178,7 +176,7 @@ class AuthController extends ChangeNotifier {
       }
     } catch (_) {
       if (context.mounted) {
-        _showError(context, 'Coś poszło nie tak. Spróbuj ponownie.');
+        _showError(context, localizations.unknownError);
       }
     }
 
@@ -189,6 +187,7 @@ class AuthController extends ChangeNotifier {
   Future<void> loginWithGoogle(BuildContext context) async {
     final navigator = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
+    final localizations = AppLocalizations.of(context)!;
 
     _isLoading = true;
     notifyListeners();
@@ -196,23 +195,20 @@ class AuthController extends ChangeNotifier {
     try {
       final user = await googleLoginUseCase();
       _user = user;
-
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('user', jsonEncode(user.toJson()));
-
       if (!context.mounted) return;
 
       navigator.pushReplacementNamed(AppRoutes.home);
       messenger.showSnackBar(
-        const SnackBar(content: Text('Zalogowano przez Google')),
+        SnackBar(content: Text(localizations.loginSuccessGoogle)),
       );
     } on NoInternetException catch (e) {
       _showError(context, e.message);
     } on HttpException catch (e) {
       _showError(context, e.message);
     } catch (e) {
-      debugPrint('Google login error: $e');
-      _showError(context, 'Logowanie przez Google nie powiodło się.');
+      _showError(context, localizations.loginGoogleError);
     }
 
     _isLoading = false;

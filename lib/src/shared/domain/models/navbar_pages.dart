@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum NavbarPages { home, championSearch, profile, settings }
 
@@ -16,16 +18,17 @@ extension NavbarPagesExtension on NavbarPages {
     }
   }
 
-  String get label {
+  String label(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     switch (this) {
       case NavbarPages.home:
-        return 'Start';
+        return localization.navbarHome;
       case NavbarPages.settings:
-        return 'Ustawienia';
+        return localization.navbarSettings;
       case NavbarPages.profile:
-        return 'Profil';
+        return localization.navbarProfile;
       case NavbarPages.championSearch:
-        return 'Championy';
+        return localization.navbarChampions;
     }
   }
 

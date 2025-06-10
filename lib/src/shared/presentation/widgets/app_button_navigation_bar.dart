@@ -32,7 +32,7 @@ class AppBottomNavigationBar extends StatelessWidget {
           availablePages.map((page) {
             return BottomNavigationBarItem(
               icon: Icon(Icons.circle),
-              label: page.label,
+              label: page.label(context),
             );
           }).toList(),
     );

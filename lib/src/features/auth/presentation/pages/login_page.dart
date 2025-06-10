@@ -3,6 +3,7 @@ import 'package:purofessor_mobile/src/features/auth/presentation/widgets/login_f
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -13,6 +14,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       bottomNavigationBar: AppBottomNavigationBar(),
       body: AppBackground(
@@ -30,9 +32,9 @@ class LoginPage extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Text(
-                    'Zaloguj się',
+                    localizations.loginTitle,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),

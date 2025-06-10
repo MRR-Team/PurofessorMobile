@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChampionSearchBar extends StatelessWidget {
   final TextEditingController controller;
@@ -12,12 +13,13 @@ class ChampionSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return TextField(
       controller: controller,
       onChanged: onChanged,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
-        hintText: 'Wybierz championa...',
+        hintText: localizations.championSearchHint,
         hintStyle: const TextStyle(color: Colors.white70),
         prefixIcon: const Icon(Icons.search, color: Colors.white70),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
