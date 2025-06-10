@@ -6,6 +6,7 @@ import 'package:purofessor_mobile/src/features/champion/presentation/widgets/cha
 import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_info.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChampionDetailsPage extends StatelessWidget {
   final int championId;
@@ -15,6 +16,7 @@ class ChampionDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = context.read<ChampionController>();
+    final localizations = AppLocalizations.of(context)!;
 
     return FutureBuilder<ChampionModel>(
       future: controller.fetchChampionDetails(championId),
@@ -27,20 +29,20 @@ class ChampionDetailsPage extends StatelessWidget {
 
         if (snapshot.hasError || !snapshot.hasData) {
           return Scaffold(
-            appBar: AppBar(title: const Text('Szczegóły championa')),
+            appBar: AppBar(title: Text(localizations.championDetailsTitle)),
             bottomNavigationBar: const AppBottomNavigationBar(),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Nie udało się załadować championa.',
+                  Text(
+                    localizations.championLoadError,
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton.icon(
                     icon: const Icon(Icons.refresh),
-                    label: const Text('Spróbuj ponownie'),
+                    label: Text(localizations.tryAgainButton),
                     onPressed: () {
                       Navigator.pop(context);
                     },

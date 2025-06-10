@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:purofessor_mobile/src/core/data/network/http_client.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final HttpClient httpClient;
@@ -9,11 +11,16 @@ class ProfileRepositoryImpl implements ProfileRepository {
   ProfileRepositoryImpl(this.httpClient, this.authController);
 
   @override
-  Future<void> updateProfile({String? name, String? password}) async {
+  Future<void> updateProfile({
+    required BuildContext context,
+    String? name,
+    String? password,
+  }) async {
+    final localizations = AppLocalizations.of(context)!;
     final userId = authController.user?.id;
 
     if (userId == null) {
-      throw Exception('Brak zalogowanego użytkownika');
+      throw Exception(localizations.noLoggedUser);
     }
 
     final body = <String, dynamic>{};

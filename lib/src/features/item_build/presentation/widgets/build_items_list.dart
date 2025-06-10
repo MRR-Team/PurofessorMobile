@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/features/item_build/domain/models/build_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BuildItemsList extends StatelessWidget {
   final List<BuildItem> items;
@@ -8,8 +9,9 @@ class BuildItemsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     if (items.isEmpty) {
-      return const Center(child: Text('Brak build items'));
+      return Center(child: Text(localizations.noBuildItems));
     }
 
     return ListView.separated(

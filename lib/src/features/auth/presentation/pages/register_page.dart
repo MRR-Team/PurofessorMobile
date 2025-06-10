@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/core/constants/app_constatns.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/widgets/register_form.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -20,7 +22,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Scaffold(
+      bottomNavigationBar: AppBottomNavigationBar(),
       body: AppBackground(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -36,9 +40,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Text(
-                    'Zarejestruj się',
+                    localizations.registerTitle,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),

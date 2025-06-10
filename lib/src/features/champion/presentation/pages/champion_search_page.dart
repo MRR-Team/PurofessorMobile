@@ -6,6 +6,7 @@ import 'package:purofessor_mobile/src/features/champion/presentation/widgets/cha
 import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_list_item.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChampionSearchPage extends StatefulWidget {
   const ChampionSearchPage({super.key});
@@ -36,9 +37,10 @@ class _ChampionSearchPageState extends State<ChampionSearchPage> {
   @override
   Widget build(BuildContext context) {
     final ctrl = context.watch<ChampionController>();
+    final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Wybierz championa')),
+      appBar: AppBar(title: Text(localizations.championSearchTitle)),
       bottomNavigationBar: const AppBottomNavigationBar(),
       body: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
@@ -80,7 +82,7 @@ class _ChampionSearchPageState extends State<ChampionSearchPage> {
                       ctrl.filteredChampions.isEmpty
                           ? Center(
                             child: Text(
-                              'Brak wyników',
+                              localizations.noResults,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                           )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/models/champion_model.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_avatar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChampionInfo extends StatelessWidget {
   final ChampionModel champion;
@@ -9,6 +10,7 @@ class ChampionInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -19,19 +21,19 @@ class ChampionInfo extends StatelessWidget {
             radius: 12,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         Text(
-          'Nazwa championa: ${champion.name}',
+          '${localizations.championNameLabel} ${champion.name}',
           style: const TextStyle(color: Colors.white, fontSize: 18),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
-          'Pozycja: ${champion.position}',
+          '${localizations.championPositionLabel} ${champion.position}',
           style: const TextStyle(color: Colors.white, fontSize: 18),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
-          'Rola: ${champion.role}',
+          '${localizations.championRoleLabel} ${champion.role}',
           style: const TextStyle(color: Colors.white, fontSize: 18),
         ),
       ],

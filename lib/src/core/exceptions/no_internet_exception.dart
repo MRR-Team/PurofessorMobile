@@ -1,7 +1,7 @@
 class NoInternetException implements Exception {
   final String message;
 
-  NoInternetException([this.message = 'Brak połączenia z internetem.']);
+  NoInternetException([this.message = 'No internet connection.']);
 
   @override
   String toString() => 'NoInternetException: $message';

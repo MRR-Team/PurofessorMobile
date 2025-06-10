@@ -102,7 +102,7 @@ class HttpClient {
       final errorMessage =
           (responseBody is Map && responseBody.containsKey('message'))
               ? responseBody['message']
-              : (response.reasonPhrase ?? 'Błąd serwera');
+              : (response.reasonPhrase ?? 'Server error');
       throw HttpException(
         message: errorMessage,
         statusCode: response.statusCode,

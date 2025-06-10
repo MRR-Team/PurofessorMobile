@@ -6,6 +6,7 @@ import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewPage = HomePageModel();
     final authController = context.watch<AuthController>();
+    final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
       bottomNavigationBar: AppBottomNavigationBar(),
@@ -41,25 +43,25 @@ class HomePage extends StatelessWidget {
                     children: [
                       if (authController.isLoggedIn)
                         HomeTile(
-                          label: 'Wygeneruj build',
+                          label: localizations.homeGenerateBuild,
                           icon: Icons.search,
                           onTap: () => viewPage.onFindCounterPressed(context),
                         ),
                       HomeTile(
-                        label: 'Championy',
+                        label: localizations.navbarChampions,
                         icon: Icons.person_search,
                         onTap: () => viewPage.onChampionsPressed(context),
                       ),
                       HomeTile(
-                        label: 'Status serwera',
+                        label: localizations.homeServerStatus,
                         icon: Icons.cloud_outlined,
                         onTap: () => viewPage.onServerStatusPressed(context),
                       ),
                       HomeTile(
                         label:
                             authController.isLoggedIn
-                                ? 'Profil'
-                                : 'Zaloguj się',
+                                ? localizations.navbarProfile
+                                : localizations.loginTitle,
                         icon:
                             authController.isLoggedIn
                                 ? Icons.person

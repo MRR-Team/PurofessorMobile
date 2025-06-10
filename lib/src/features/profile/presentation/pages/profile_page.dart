@@ -9,6 +9,7 @@ import 'package:purofessor_mobile/src/features/profile/presentation/widgets/prof
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -17,6 +18,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = context.watch<AuthController>().user;
     final controller = context.watch<ProfileController>();
+    final localizations = AppLocalizations.of(context)!;
 
     if (user == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -32,7 +34,7 @@ class ProfilePage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Profil')),
+      appBar: AppBar(title: Text(localizations.navbarProfile)),
       bottomNavigationBar: AppBottomNavigationBar(),
       body: AppBackground(
         child: SingleChildScrollView(
@@ -46,7 +48,10 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 16),
 
               Button(
-                label: controller.isEditing ? 'Anuluj' : 'Edytuj profil',
+                label:
+                    controller.isEditing
+                        ? localizations.cancel
+                        : localizations.editProfile,
                 icon: controller.isEditing ? Icons.close : Icons.edit,
                 onPressed: controller.toggleEdit,
               ),
@@ -64,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               const SizedBox(height: 32),
 
-              const LogoutButton(),
+              LogoutButton(),
             ],
           ),
         ),

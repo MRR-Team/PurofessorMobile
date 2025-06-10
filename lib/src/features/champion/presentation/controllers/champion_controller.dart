@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/core/exceptions/http_exception.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/models/champion_model.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/repositories/champion_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChampionController extends ChangeNotifier {
   final ChampionRepository repository;
@@ -22,6 +23,7 @@ class ChampionController extends ChangeNotifier {
   Future<void> fetchChampions(BuildContext context) async {
     _isLoading = true;
     notifyListeners();
+    final localizations = AppLocalizations.of(context)!;
 
     try {
       _champions = await repository.getChampions();
@@ -29,7 +31,7 @@ class ChampionController extends ChangeNotifier {
     } on HttpException catch (e) {
       if (context.mounted) _showError(context, e.message);
     } catch (_) {
-      if (context.mounted) _showError(context, 'Wystąpił nieoczekiwany błąd.');
+      if (context.mounted) _showError(context, localizations.unknownError);
     }
 
     _isLoading = false;

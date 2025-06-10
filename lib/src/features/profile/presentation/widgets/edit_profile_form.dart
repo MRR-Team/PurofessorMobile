@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfileForm extends StatefulWidget {
   final void Function({String? name, String? password}) onSave;
@@ -17,6 +18,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Form(
@@ -26,8 +28,8 @@ class _EditProfileFormState extends State<EditProfileForm> {
             TextFormField(
               controller: nameController,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                labelText: 'Nowa nazwa użytkownika',
+              decoration: InputDecoration(
+                labelText: localizations.editProfileNewUsername,
                 labelStyle: TextStyle(color: Colors.white70),
                 prefixIcon: Icon(Icons.person_outline, color: Colors.white),
               ),
@@ -36,8 +38,8 @@ class _EditProfileFormState extends State<EditProfileForm> {
             TextFormField(
               controller: passwordController,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                labelText: 'Nowe hasło',
+              decoration: InputDecoration(
+                labelText: localizations.editProfileNewPassword,
                 labelStyle: TextStyle(color: Colors.white70),
                 prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
               ),
@@ -47,8 +49,8 @@ class _EditProfileFormState extends State<EditProfileForm> {
             TextFormField(
               controller: confirmController,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                labelText: 'Potwierdź hasło',
+              decoration: InputDecoration(
+                labelText: localizations.confirmPasswordLabel,
                 labelStyle: TextStyle(color: Colors.white70),
                 prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
               ),
@@ -56,7 +58,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
               validator: (value) {
                 if (passwordController.text.isNotEmpty &&
                     value != passwordController.text) {
-                  return 'Hasła się różnią';
+                  return localizations.passwordsDoNotMatch;
                 }
                 return null;
               },
@@ -69,8 +71,8 @@ class _EditProfileFormState extends State<EditProfileForm> {
 
                 if (name.isEmpty && password.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Uzupełnij przynajmniej jedno pole'),
+                    SnackBar(
+                      content: Text(localizations.editProfileEmptyFieldsError),
                     ),
                   );
                   return;
@@ -83,7 +85,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   password: password.isNotEmpty ? password : null,
                 );
               },
-              child: const Text('Zapisz zmiany'),
+              child: Text(localizations.editProfileSaveChanges),
             ),
           ],
         ),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:purofessor_mobile/src/core/routes/app_routes.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/button.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -23,6 +24,7 @@ class RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = Provider.of<AuthController>(context);
+    final localizations = AppLocalizations.of(context)!;
 
     return Form(
       key: formKey,
@@ -33,14 +35,14 @@ class RegisterForm extends StatelessWidget {
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
             style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              labelText: 'Email',
+            decoration: InputDecoration(
+              labelText: localizations.emailLabel,
               labelStyle: TextStyle(color: Colors.white70),
               prefixIcon: Icon(Icons.email_outlined, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Podaj email';
+                return localizations.emailRequiredError;
               }
               return null;
             },
@@ -49,14 +51,14 @@ class RegisterForm extends StatelessWidget {
           TextFormField(
             controller: nameController,
             style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              labelText: 'Nazwa',
+            decoration: InputDecoration(
+              labelText: localizations.nameLabel,
               labelStyle: TextStyle(color: Colors.white70),
               prefixIcon: Icon(Icons.person_outline, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Podaj nazwę';
+                return localizations.nameRequiredError;
               }
               return null;
             },
@@ -66,14 +68,14 @@ class RegisterForm extends StatelessWidget {
             controller: passwordController,
             obscureText: true,
             style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              labelText: 'Hasło',
+            decoration: InputDecoration(
+              labelText: localizations.passwordLabel,
               labelStyle: TextStyle(color: Colors.white70),
               prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Podaj hasło';
+                return localizations.passwordRequiredError;
               }
               return null;
             },
@@ -83,17 +85,17 @@ class RegisterForm extends StatelessWidget {
             controller: confirmPasswordController,
             obscureText: true,
             style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              labelText: 'Potwierdź hasło',
+            decoration: InputDecoration(
+              labelText: localizations.confirmPasswordLabel,
               labelStyle: TextStyle(color: Colors.white70),
               prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Powtórz hasło';
+                return localizations.passwordRequiredError;
               }
               if (value != passwordController.text) {
-                return 'Hasła nie są takie same';
+                return localizations.passwordsDoNotMatch;
               }
               return null;
             },
@@ -101,7 +103,7 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(height: 24),
 
           Button(
-            label: 'Zarejestruj się',
+            label: localizations.registerButton,
             isLoading: authController.isLoading,
             fullWidth: true,
             onPressed: () {
@@ -121,19 +123,10 @@ class RegisterForm extends StatelessWidget {
 
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/guest');
-            },
-            child: const Text(
-              'Wejdź jako gość',
-              style: TextStyle(color: Colors.white70),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
               Navigator.pushNamed(context, AppRoutes.login);
             },
-            child: const Text(
-              'Masz już konto? Zaloguj się.',
+            child: Text(
+              localizations.alreadyHaveAccount,
               style: TextStyle(color: Colors.white70),
             ),
           ),
