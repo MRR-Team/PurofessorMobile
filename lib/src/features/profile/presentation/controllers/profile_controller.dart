@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/shared/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 import 'package:purofessor_mobile/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:purofessor_mobile/src/features/auth/data/data_sources/auth_data_source.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/features/auth/presentation/widgets/forgot_password_form.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({super.key});

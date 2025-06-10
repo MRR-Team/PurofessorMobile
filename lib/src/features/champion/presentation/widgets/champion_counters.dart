@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/models/champion_model.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/controllers/champion_controller.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_avatar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 class ChampionCounters extends StatelessWidget {
   final ChampionModel champion;

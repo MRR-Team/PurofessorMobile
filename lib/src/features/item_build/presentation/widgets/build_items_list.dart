@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/features/item_build/domain/models/build_item.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 class BuildItemsList extends StatelessWidget {
   final List<BuildItem> items;

@@ -4,7 +4,7 @@ import 'package:purofessor_mobile/src/features/item_build/domain/usecases/get_bu
 import 'package:purofessor_mobile/src/core/exceptions/no_internet_exception.dart';
 import 'package:purofessor_mobile/src/core/exceptions/http_exception.dart';
 import 'package:purofessor_mobile/src/core/exceptions/message_exception.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 enum BuildItemsState { initial, loading, loaded, error }
 

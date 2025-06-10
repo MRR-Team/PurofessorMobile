@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/models/champion_model.dart';
 import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_avatar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 class ChampionInfo extends StatelessWidget {
   final ChampionModel champion;

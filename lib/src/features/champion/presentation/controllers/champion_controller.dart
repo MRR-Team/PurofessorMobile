@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:purofessor_mobile/src/core/exceptions/http_exception.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/models/champion_model.dart';
 import 'package:purofessor_mobile/src/features/champion/domain/repositories/champion_repository.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 class ChampionController extends ChangeNotifier {
   final ChampionRepository repository;

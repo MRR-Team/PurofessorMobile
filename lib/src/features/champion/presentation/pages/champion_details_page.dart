@@ -6,7 +6,7 @@ import 'package:purofessor_mobile/src/features/champion/presentation/widgets/cha
 import 'package:purofessor_mobile/src/features/champion/presentation/widgets/champion_info.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_background.dart';
 import 'package:purofessor_mobile/src/shared/presentation/widgets/app_button_navigation_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:purofessor_mobile/l10n/generated/app_localizations.dart';
 
 class ChampionDetailsPage extends StatelessWidget {
   final int championId;
