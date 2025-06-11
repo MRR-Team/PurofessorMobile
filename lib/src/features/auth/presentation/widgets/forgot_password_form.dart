@@ -33,16 +33,20 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
         children: [
           Text(
             localizations.forgotPasswordEmailInstruction,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: Colors.white),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
           TextFormField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
+            style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
               labelText: localizations.emailLabel,
-              prefixIcon: Icon(Icons.email_outlined),
+              labelStyle: TextStyle(color: Colors.white70),
+              prefixIcon: Icon(Icons.email_outlined, color: Colors.white),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {

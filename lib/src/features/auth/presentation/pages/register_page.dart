@@ -37,6 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     AppConstants.appName,
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -45,6 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     localizations.registerTitle,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
