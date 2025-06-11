@@ -202,4 +202,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get userName => 'User Name';
+
+  @override
+  String get serverStatusTitle => 'Server Status';
+
+  @override
+  String get region => 'Region';
+
+  @override
+  String get serverName => 'Server Name';
+
+  @override
+  String get maintenances => 'Maintenances';
+
+  @override
+  String get incidents => 'Incidents';
+
+  @override
+  String get noMaintenances => 'No maintenances.';
+
+  @override
+  String get noIncidents => 'No incidents.';
+
+  @override
+  String get errorFetchingData => 'Error while fetching data.';
+
+  @override
+  String get noData => 'No data.';
+
+  @override
+  String createdAt(Object date) {
+    return 'Created at: $date';
+  }
+
+  @override
+  String get regionName_euw1 => 'Western Europe';
+
+  @override
+  String get regionName_na1 => 'North America';
+
+  @override
+  String get regionName_eun1 => 'Northern & Eastern Europe';
+
+  @override
+  String get regionName_kr => 'Korea';
+
+  @override
+  String get regionName_br1 => 'Brazil';
+
+  @override
+  String get regionName_jp1 => 'Japan';
+
+  @override
+  String get regionName_oc1 => 'Oceania';
+
+  @override
+  String get regionName_ru => 'Russia';
+
+  @override
+  String get regionName_tr1 => 'Turkey';
 }

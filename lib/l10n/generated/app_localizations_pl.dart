@@ -202,4 +202,63 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get userName => 'Nazwa użytkownika';
+
+  @override
+  String get serverStatusTitle => 'Status serwera';
+
+  @override
+  String get region => 'Region';
+
+  @override
+  String get serverName => 'Nazwa serwera';
+
+  @override
+  String get maintenances => 'Prace konserwacyjne';
+
+  @override
+  String get incidents => 'Incydenty';
+
+  @override
+  String get noMaintenances => 'Brak prac konserwacyjnych.';
+
+  @override
+  String get noIncidents => 'Brak incydentów.';
+
+  @override
+  String get errorFetchingData => 'Błąd podczas pobierania danych.';
+
+  @override
+  String get noData => 'Brak danych.';
+
+  @override
+  String createdAt(Object date) {
+    return 'Utworzono: $date';
+  }
+
+  @override
+  String get regionName_euw1 => 'Europa Zachodnia';
+
+  @override
+  String get regionName_na1 => 'Ameryka Północna';
+
+  @override
+  String get regionName_eun1 => 'Europa Północno-Wschodnia';
+
+  @override
+  String get regionName_kr => 'Korea';
+
+  @override
+  String get regionName_br1 => 'Brazylia';
+
+  @override
+  String get regionName_jp1 => 'Japonia';
+
+  @override
+  String get regionName_oc1 => 'Oceania';
+
+  @override
+  String get regionName_ru => 'Rosja';
+
+  @override
+  String get regionName_tr1 => 'Turcja';
 }
