@@ -29,6 +29,7 @@ class LoginPage extends StatelessWidget {
                     AppConstants.appName,
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -37,6 +38,7 @@ class LoginPage extends StatelessWidget {
                     localizations.loginTitle,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
