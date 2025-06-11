@@ -23,6 +23,9 @@ import 'package:purofessor_mobile/src/features/item_build/data/data_sources/buil
 import 'package:purofessor_mobile/src/features/item_build/data/repositories/build_items_repository_impl.dart';
 import 'package:purofessor_mobile/src/features/item_build/domain/usecases/get_build_items_usecase.dart';
 import 'package:purofessor_mobile/src/features/item_build/presentation/controllers/build_items_controller.dart';
+import 'package:purofessor_mobile/src/features/server_status/data/data_sources/server_status_data_source.dart';
+import 'package:purofessor_mobile/src/features/server_status/data/repositories/server_status_repository_impl.dart';
+import 'package:purofessor_mobile/src/features/server_status/presentation/controllers/server_status_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/controllers/localization_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/controllers/navbar_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/controllers/theme_controller.dart';
@@ -46,6 +49,14 @@ class AppSetup {
     final forgotPasswordUseCase = ForgotPasswordUseCase(authRepository);
     final googleAuthService = GoogleAuthService(httpClient);
     final googleLoginUseCase = GoogleLoginUseCase(googleAuthService);
+
+    final serverStatusDataSource = ServerStatusDataSource(httpClient);
+    final serverStatusRepository = ServerStatusRepositoryImpl(
+      serverStatusDataSource,
+    );
+    final serverStatusController = ServerStatusController(
+      serverStatusRepository,
+    );
 
     final authController = AuthController(
       loginUseCase: loginUseCase,
@@ -94,6 +105,9 @@ class AppSetup {
           value: buildItemsController,
         ),
         ChangeNotifierProvider(create: (_) => NavbarController()),
+        ChangeNotifierProvider<ServerStatusController>.value(
+          value: serverStatusController,
+        ),
       ],
       child: const AppInitializer(),
     );

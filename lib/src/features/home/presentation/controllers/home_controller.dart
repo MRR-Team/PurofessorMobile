@@ -19,6 +19,6 @@ class HomePageModel {
   }
 
   void onServerStatusPressed(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.settings);
+    Navigator.pushNamed(context, AppRoutes.serverStatus);
   }
 }

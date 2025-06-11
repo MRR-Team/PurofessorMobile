@@ -484,6 +484,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'User Name'**
   String get userName;
+
+  /// No description provided for @serverStatusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Server Status'**
+  String get serverStatusTitle;
+
+  /// No description provided for @region.
+  ///
+  /// In en, this message translates to:
+  /// **'Region'**
+  String get region;
+
+  /// No description provided for @serverName.
+  ///
+  /// In en, this message translates to:
+  /// **'Server Name'**
+  String get serverName;
+
+  /// No description provided for @maintenances.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintenances'**
+  String get maintenances;
+
+  /// No description provided for @incidents.
+  ///
+  /// In en, this message translates to:
+  /// **'Incidents'**
+  String get incidents;
+
+  /// No description provided for @noMaintenances.
+  ///
+  /// In en, this message translates to:
+  /// **'No maintenances.'**
+  String get noMaintenances;
+
+  /// No description provided for @noIncidents.
+  ///
+  /// In en, this message translates to:
+  /// **'No incidents.'**
+  String get noIncidents;
+
+  /// No description provided for @errorFetchingData.
+  ///
+  /// In en, this message translates to:
+  /// **'Error while fetching data.'**
+  String get errorFetchingData;
+
+  /// No description provided for @noData.
+  ///
+  /// In en, this message translates to:
+  /// **'No data.'**
+  String get noData;
+
+  /// No description provided for @createdAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created at: {date}'**
+  String createdAt(Object date);
+
+  /// No description provided for @regionName_euw1.
+  ///
+  /// In en, this message translates to:
+  /// **'Western Europe'**
+  String get regionName_euw1;
+
+  /// No description provided for @regionName_na1.
+  ///
+  /// In en, this message translates to:
+  /// **'North America'**
+  String get regionName_na1;
+
+  /// No description provided for @regionName_eun1.
+  ///
+  /// In en, this message translates to:
+  /// **'Northern & Eastern Europe'**
+  String get regionName_eun1;
+
+  /// No description provided for @regionName_kr.
+  ///
+  /// In en, this message translates to:
+  /// **'Korea'**
+  String get regionName_kr;
+
+  /// No description provided for @regionName_br1.
+  ///
+  /// In en, this message translates to:
+  /// **'Brazil'**
+  String get regionName_br1;
+
+  /// No description provided for @regionName_jp1.
+  ///
+  /// In en, this message translates to:
+  /// **'Japan'**
+  String get regionName_jp1;
+
+  /// No description provided for @regionName_oc1.
+  ///
+  /// In en, this message translates to:
+  /// **'Oceania'**
+  String get regionName_oc1;
+
+  /// No description provided for @regionName_ru.
+  ///
+  /// In en, this message translates to:
+  /// **'Russia'**
+  String get regionName_ru;
+
+  /// No description provided for @regionName_tr1.
+  ///
+  /// In en, this message translates to:
+  /// **'Turkey'**
+  String get regionName_tr1;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -511,9 +625,9 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+          'an issue with the localizations generation tool. Please file an issue '
+          'on GitHub with a reproducible sample app and the gen-l10n configuration '
+          'that was used.'
   );
 }

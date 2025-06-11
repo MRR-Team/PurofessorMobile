@@ -14,6 +14,7 @@ import 'package:purofessor_mobile/src/features/champion/presentation/pages/champ
 import 'package:purofessor_mobile/src/features/home/presentation/pages/home_page.dart';
 import 'package:purofessor_mobile/src/features/item_build/presentation/pages/build_items_page.dart';
 import 'package:purofessor_mobile/src/features/profile/presentation/pages/profile_page.dart';
+import 'package:purofessor_mobile/src/features/server_status/presentation/pages/server_status_page.dart';
 import 'package:purofessor_mobile/src/features/settings/presentation/pages/settings_page.dart';
 import 'package:purofessor_mobile/src/shared/presentation/controllers/localization_controller.dart';
 import 'package:purofessor_mobile/src/shared/presentation/controllers/theme_controller.dart';
@@ -71,6 +72,7 @@ class AppInitializer extends StatelessWidget {
         },
         AppRoutes.forgotPassword: (context) => ForgotPasswordPage(),
         AppRoutes.buildItems: (context) => BuildItemsPage(),
+        AppRoutes.serverStatus: (context) => const ServerStatusPage(),
       },
     );
   }

@@ -9,4 +9,5 @@ class AppRoutes {
   static const String championDetails = '/champion-details';
   static const String forgotPassword = '/forgot-password';
   static const String buildItems = '/build-items';
+  static const serverStatus = '/server-status';
 }
